@@ -2,10 +2,10 @@
 title: "Nossos Projetos"
 ---
 
-:::{.content-block}
-## Projeto Big Data para Finanças
+::: content-block
+## Big Data for Finance Project
 
-![Projeto de Finanças](/api/placeholder/600/300)
+![](images/datafinance.png){width="431"}
 
 ### Visão Geral do Projeto
 
@@ -13,21 +13,25 @@ Este projeto se concentra na análise de grandes conjuntos de dados financeiros 
 
 ### Metodologias Utilizadas
 
-- Análise de Séries Temporais
-- Processamento de Linguagem Natural para Análise de Sentimento de Notícias
-- Machine Learning para Previsão
-- Visualizações Interativas
+-   Análise de Séries Temporais
+-   Processamento de Linguagem Natural para Análise de Sentimento de Notícias
+-   Machine Learning para Previsão
+-   Visualizações Interativas
 
 ### Principais Descobertas
 
-- Descobrimos correlação entre o sentimento nas redes sociais e os movimentos do mercado
-- Criamos um modelo preditivo com 78% de precisão para mudanças de preço de curto prazo
-- Desenvolvemos um painel interativo para análise de mercado em tempo real
+-   Descobrimos correlação entre o sentimento nas redes sociais e os movimentos do mercado
+-   Criamos um modelo preditivo com 78% de precisão para mudanças de preço de curto prazo
+-   Desenvolvemos um painel interativo para análise de mercado em tempo real
 
-[Ver no GitHub →](https://github.com/SEU-USUARIO/portfolio)
+### Evolução Semana a Semana
+
+-   [Montando a carteira de investimentos do grupo (07/03)](semana1.qmd)
+-   Criamos um modelo preditivo com 78% de precisão para mudanças de preço de curto prazo
+-   Desenvolvemos um painel interativo para análise de mercado em tempo real
 :::
 
-:::{.content-block}
+::: content-block
 ## Outros Projetos
 
 ### Desafio de Visualização de Dados
@@ -43,7 +47,7 @@ Desenvolvemos um ambiente de negociação simulado para testar várias estratég
 Criamos uma ferramenta que avalia carteiras de investimento e fornece avaliações de risco com base na volatilidade do mercado e nas correlações de ativos.
 :::
 
-:::{.callout}
+::: callout
 **Documentação do Projeto**
 
 Todos os nossos projetos incluem documentação abrangente, explicações de código e exemplos reproduzíveis.

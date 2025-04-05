@@ -2,58 +2,78 @@
 title: "Sobre Nós"
 ---
 
-:::{.content-block}
+::: content-block
 ## Nossa Equipe
 
-Somos um grupo de estudantes apaixonados da [Nome da Sua Faculdade] com experiências diversas em ciência da computação, estatística, finanças e ciência de dados. Nossos esforços colaborativos se concentram na resolução de problemas do mundo real usando abordagens orientadas por dados.
+Somos um grupo de estudantes apaixonados da FAE com experiências diversas em ciência da computação, estatística, finanças e ciência de dados. Nossos esforços colaborativos se concentram na resolução de problemas do mundo real usando abordagens orientadas por dados.
 
-![Foto da Equipe](/api/placeholder/600/300)
+![](images/fotodaequipe.jpeg){fig-align="center" width="255"}
 :::
 
-:::{.content-block}
+::: content-block
 ## Membros da Equipe
 
-### Nome do Membro
-**Função:** Analista de Dados
-**Habilidades:** R, Python, Análise Estatística
-**Contato:** email@exemplo.com
+![](images/gabe.jpeg){width="170"}
 
-### Nome do Membro
-**Função:** Engenheiro de ML
-**Habilidades:** TensorFlow, PyTorch, Deep Learning
-**Contato:** email@exemplo.com
+### Gabriel Prado
 
-### Nome do Membro
+**Função:** Engenheiro de Vendas
+
+**Habilidades:** Python, SQL, Análise de Dados, Metodologias Ágeis, Organização, Trabalho em Equipe
+
+\
+
+![](images/zeze.jpeg){width="170"}
+
+### José Marcos
+
+**Função:** Analista de Riscos
+
+**Habilidades:** Apresentação de Dados, Manipulação de Dados, Visualização de Dados, Estatística
+
+\
+
+![](images/kaka.jpeg){width="170"}
+
+### Lucas Kainã
+
+**Função:** Analista de Negócios
+
+**Habilidades:** Análise Financeira, Análise Exploratória de dados, Modelagem Preditiva
+
+\
+
+![](images/tutuco.jpeg){width="170"}
+
+### Arthur Liz
+
 **Função:** Analista Financeiro
-**Habilidades:** Modelagem Financeira, Análise de Mercado
-**Contato:** email@exemplo.com
 
-### Nome do Membro
-**Função:** Especialista em Visualização
-**Habilidades:** D3.js, Tableau, Narrativa de Dados
-**Contato:** email@exemplo.com
+**Habilidades:** Análise financeira, Modelagem preditiva, Python, R, SQL, Power BI, Looker Studio, Tableau
 :::
 
-:::{.content-block}
+::: content-block
 ## Nossa Abordagem
 
 Acreditamos na aprendizagem colaborativa e na aplicação prática de técnicas de ciência de dados. Nossos projetos combinam conhecimento acadêmico com aplicações do mundo real, particularmente no setor financeiro.
 
 Nosso fluxo de trabalho geralmente inclui:
 
-1. Definição do problema e pesquisa
-2. Coleta e pré-processamento de dados
-3. Análise exploratória de dados
-4. Desenvolvimento e teste de modelos
-5. Visualização e comunicação de resultados
-6. Melhoria contínua e iteração
+1.  Definição do problema e pesquisa
+2.  Coleta e pré-processamento de dados
+3.  Análise exploratória de dados
+4.  Desenvolvimento e teste de modelos
+5.  Visualização e comunicação de resultados
+6.  Melhoria contínua e iteração
 :::
 
-:::{.content-block}
+::: content-block
 ## Informações do Curso
 
-Este portfólio foi criado como parte do curso **Projeto Big Data para Finanças** na [Nome da Sua Faculdade].
+Este portfólio foi criado como parte do curso **Big Data for Finance Project** na FAE Business School. Conduzida por:
 
-**Professor:** [Nome do Professor]  
-**Período:** [Semestre/Ano]
+![](images/profrodrigo.jpg)
+
+**Professor Rodrigo H. Ozon\
+**
 :::

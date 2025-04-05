@@ -1,0 +1,160 @@
+---
+title: "Análise de Carteira de Investimentos"
+author: "CLAPS"
+date: "2025-03-07"
+format: 
+  html:
+    code-fold: true
+    toc: true
+---
+
+# Análise de Carteira de Investimentos - Semana 1
+
+## Introdução
+
+Neste projeto, analisaremos uma carteira de investimentos composta por seis empresas líderes de tecnologia. A seleção foi feita com base na relevância destas empresas no setor tecnológico, sua capitalização de mercado e potencial de crescimento.
+
+## Seleção de Empresas
+
+Nossa carteira é composta pelos seguintes ativos:
+
+1. **NVDA** (NVIDIA Corporation)
+2. **AAPL** (Apple Inc.)
+3. **TSLA** (Tesla, Inc.)
+4. **META** (Meta Platforms, Inc.)
+5. **AMZN** (Amazon.com, Inc.)
+6. **MSFT** (Microsoft Corporation)
+
+## Justificativa da Escolha
+
+A carteira foi estruturada com base nos seguintes critérios:
+
+- **Diversificação dentro do setor tecnológico**: Embora todas sejam empresas de tecnologia, cada uma atua em segmentos distintos - hardware, software, redes sociais, comércio eletrônico, veículos elétricos e inteligência artificial.
+  
+- **Exposição à inovação**: Todas as empresas selecionadas investem fortemente em pesquisa e desenvolvimento, com foco em tecnologias emergentes como inteligência artificial, realidade aumentada, computação em nuvem e veículos autônomos.
+  
+- **Liderança de mercado**: Todas são líderes em seus respectivos segmentos, com forte presença global e vantagens competitivas significativas.
+  
+- **Potencial de crescimento**: Apesar de já serem empresas consolidadas, continuam apresentando perspectivas de crescimento em novos mercados e através de inovações disruptivas.
+
+## Coleta de Dados
+
+Para este projeto, utilizaremos a API `yahooquery` em Python para coletar os dados históricos de preços das ações selecionadas. Abaixo segue o código para a coleta dos dados:
+
+```python
+# Importando bibliotecas necessárias
+import pandas as pd
+from yahooquery import Ticker
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+from datetime import datetime, timedelta
+
+# Definindo os tickers da nossa carteira
+tickers = ['NVDA', 'AAPL', 'TSLA', 'META', 'AMZN', 'MSFT']
+
+# Criando objeto Ticker
+stocks = Ticker(tickers)
+
+# Definindo período de análise (últimos 2 anos)
+end_date = datetime.now()
+start_date = end_date - timedelta(days=365*2)
+
+# Coletando dados históricos
+historical_data = stocks.history(start=start_date, end=end_date)
+
+# Resetando o índice para facilitar a manipulação
+historical_data = historical_data.reset_index()
+
+# Visualizando os primeiros registros para confirmar a coleta
+print(historical_data.head())
+```
+
+## Análise Preliminar dos Dados
+
+Vamos fazer uma análise preliminar dos dados coletados, incluindo a visualização dos preços de fechamento ajustados ao longo do tempo:
+
+```python
+# Pivotando os dados para facilitar a visualização
+closing_prices = historical_data.pivot_table(index='date', columns='symbol', values='adjclose')
+
+# Plotando os preços de fechamento ajustados
+plt.figure(figsize=(12, 8))
+for ticker in tickers:
+    plt.plot(closing_prices.index, closing_prices[ticker], label=ticker)
+
+plt.title('Preços de Fechamento Ajustados')
+plt.xlabel('Data')
+plt.ylabel('Preço ($)')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Calculando retornos diários
+daily_returns = closing_prices.pct_change().dropna()
+
+# Estatísticas descritivas dos retornos
+stats = daily_returns.describe().T
+stats['volatility'] = daily_returns.std() * np.sqrt(252)  # Volatilidade anualizada
+print(stats)
+```
+
+## Análise de Correlação
+
+Vamos analisar a correlação entre os retornos das ações para entender como esses ativos se movimentam em relação uns aos outros:
+
+```python
+# Calculando a matriz de correlação
+correlation_matrix = daily_returns.corr()
+
+# Visualizando a matriz de correlação com um mapa de calor
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title('Matriz de Correlação dos Retornos Diários')
+plt.show()
+```
+
+## Análise de Risco e Retorno
+
+Vamos comparar o risco (volatilidade) e o retorno médio anualizado de cada ativo:
+
+```python
+# Calculando retornos médios anualizados
+mean_return = daily_returns.mean() * 252
+volatility = daily_returns.std() * np.sqrt(252)
+
+# Criando um DataFrame para visualização
+risk_return = pd.DataFrame({
+    'Retorno Anualizado': mean_return,
+    'Volatilidade': volatility
+})
+
+# Visualizando o gráfico de risco x retorno
+plt.figure(figsize=(10, 8))
+plt.scatter(risk_return['Volatilidade'], risk_return['Retorno Anualizado'], s=50)
+
+# Adicionando rótulos aos pontos
+for i, ticker in enumerate(tickers):
+    plt.annotate(ticker, (risk_return['Volatilidade'][i], risk_return['Retorno Anualizado'][i]),
+                 xytext=(5, 5), textcoords='offset points')
+
+plt.title('Análise de Risco x Retorno')
+plt.xlabel('Risco (Volatilidade Anualizada)')
+plt.ylabel('Retorno Médio Anualizado')
+plt.grid(True)
+plt.axhline(y=0, color='r', linestyle='-', alpha=0.3)
+plt.axvline(x=0, color='r', linestyle='-', alpha=0.3)
+plt.show()
+```
+
+## Próximos Passos
+
+Na próxima etapa do projeto, iremos:
+
+1. Realizar uma análise mais aprofundada do desempenho histórico desses ativos
+2. Calcular métricas importantes como Sharpe Ratio, Sortino Ratio e Maximum Drawdown
+3. Otimizar a alocação de ativos usando técnicas como a Teoria Moderna de Portfólio
+4. Realizar backtesting de diferentes estratégias de rebalanceamento
+5. Analisar a exposição da carteira a diferentes fatores de risco
+
+Esta análise preliminar nos dá uma base para entender o comportamento dos ativos selecionados e a dinâmica entre eles, orientando nossas decisões futuras de investimento.
