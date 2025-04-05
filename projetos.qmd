@@ -1,0 +1,50 @@
+---
+title: "Nossos Projetos"
+---
+
+:::{.content-block}
+## Projeto Big Data para Finanças
+
+![Projeto de Finanças](/api/placeholder/600/300)
+
+### Visão Geral do Projeto
+
+Este projeto se concentra na análise de grandes conjuntos de dados financeiros para extrair insights e padrões significativos. Implementamos vários algoritmos de machine learning para prever movimentos do mercado e identificar oportunidades de investimento.
+
+### Metodologias Utilizadas
+
+- Análise de Séries Temporais
+- Processamento de Linguagem Natural para Análise de Sentimento de Notícias
+- Machine Learning para Previsão
+- Visualizações Interativas
+
+### Principais Descobertas
+
+- Descobrimos correlação entre o sentimento nas redes sociais e os movimentos do mercado
+- Criamos um modelo preditivo com 78% de precisão para mudanças de preço de curto prazo
+- Desenvolvemos um painel interativo para análise de mercado em tempo real
+
+[Ver no GitHub →](https://github.com/SEU-USUARIO/portfolio)
+:::
+
+:::{.content-block}
+## Outros Projetos
+
+### Desafio de Visualização de Dados
+
+Um projeto de visualização que transforma dados financeiros complexos em gráficos intuitivos e interativos para melhor tomada de decisões.
+
+### Simulação de Negociação Algorítmica
+
+Desenvolvemos um ambiente de negociação simulado para testar várias estratégias algorítmicas contra dados históricos do mercado.
+
+### Ferramenta de Avaliação de Risco Financeiro
+
+Criamos uma ferramenta que avalia carteiras de investimento e fornece avaliações de risco com base na volatilidade do mercado e nas correlações de ativos.
+:::
+
+:::{.callout}
+**Documentação do Projeto**
+
+Todos os nossos projetos incluem documentação abrangente, explicações de código e exemplos reproduzíveis.
+:::

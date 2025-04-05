@@ -1,0 +1,40 @@
+---
+title: "Portfólio do Nosso Grupo"
+---
+
+:::{.content-block}
+## Bem-vindo ao Nosso Portfólio de Ciência de Dados
+
+Somos um grupo de estudantes da [Nome da Sua Faculdade] trabalhando juntos em vários projetos de ciência de dados e big data. Este portfólio apresenta nosso trabalho colaborativo e nossas conquistas.
+:::
+
+:::{.content-block}
+## Projeto em Destaque
+
+![Imagem do Projeto](/api/placeholder/600/300)
+
+### Análise de Dados Financeiros
+
+Nosso projeto principal envolve a análise de dados do mercado financeiro para identificar padrões e fazer previsões. Implementamos vários algoritmos de machine learning e técnicas de visualização.
+
+[Ver Detalhes do Projeto →](projetos.qmd)
+:::
+
+:::{.content-block}
+## Membros do Grupo
+
+- **Nome do Membro** - *Função/Especialidade*
+- **Nome do Membro** - *Função/Especialidade*
+- **Nome do Membro** - *Função/Especialidade*
+- **Nome do Membro** - *Função/Especialidade*
+:::
+
+:::{.content-block}
+## Tecnologias que Utilizamos
+
+- R/Python para Análise de Dados
+- Quarto para Documentação
+- GitHub para Colaboração
+- Bibliotecas de Machine Learning
+- Integração com APIs Financeiras
+:::

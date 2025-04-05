@@ -1,0 +1,26 @@
+project:
+  type: website
+  output-dir: "."
+
+website:
+  title: "Portfólio do Grupo"
+  navbar:
+    background: "white"
+    search: true
+    left:
+      - href: index.qmd
+        text: Início
+      - href: projetos.qmd
+        text: Projetos
+      - href: sobre.qmd
+        text: Sobre Nós
+    right:
+      - icon: github
+        href: https://github.com/SEU-USUARIO/portfolio
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    page-layout: full

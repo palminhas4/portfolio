@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "sobre.html",
+    "href": "sobre.html",
+    "title": "Sobre Nós",
+    "section": "",
+    "text": "Somos um grupo de estudantes apaixonados da [Nome da Sua Faculdade] com experiências diversas em ciência da computação, estatística, finanças e ciência de dados. Nossos esforços colaborativos se concentram na resolução de problemas do mundo real usando abordagens orientadas por dados.\n\n\n\nFoto da Equipe"
+  },
+  {
+    "objectID": "sobre.html#nossa-equipe",
+    "href": "sobre.html#nossa-equipe",
+    "title": "Sobre Nós",
+    "section": "",
+    "text": "Somos um grupo de estudantes apaixonados da [Nome da Sua Faculdade] com experiências diversas em ciência da computação, estatística, finanças e ciência de dados. Nossos esforços colaborativos se concentram na resolução de problemas do mundo real usando abordagens orientadas por dados.\n\n\n\nFoto da Equipe"
+  },
+  {
+    "objectID": "sobre.html#membros-da-equipe",
+    "href": "sobre.html#membros-da-equipe",
+    "title": "Sobre Nós",
+    "section": "Membros da Equipe",
+    "text": "Membros da Equipe\n\nNome do Membro\nFunção: Analista de Dados Habilidades: R, Python, Análise Estatística Contato: email@exemplo.com\n\n\nNome do Membro\nFunção: Engenheiro de ML Habilidades: TensorFlow, PyTorch, Deep Learning Contato: email@exemplo.com\n\n\nNome do Membro\nFunção: Analista Financeiro Habilidades: Modelagem Financeira, Análise de Mercado Contato: email@exemplo.com\n\n\nNome do Membro\nFunção: Especialista em Visualização Habilidades: D3.js, Tableau, Narrativa de Dados Contato: email@exemplo.com"
+  },
+  {
+    "objectID": "sobre.html#nossa-abordagem",
+    "href": "sobre.html#nossa-abordagem",
+    "title": "Sobre Nós",
+    "section": "Nossa Abordagem",
+    "text": "Nossa Abordagem\nAcreditamos na aprendizagem colaborativa e na aplicação prática de técnicas de ciência de dados. Nossos projetos combinam conhecimento acadêmico com aplicações do mundo real, particularmente no setor financeiro.\nNosso fluxo de trabalho geralmente inclui:\n\nDefinição do problema e pesquisa\nColeta e pré-processamento de dados\nAnálise exploratória de dados\nDesenvolvimento e teste de modelos\nVisualização e comunicação de resultados\nMelhoria contínua e iteração"
+  },
+  {
+    "objectID": "sobre.html#informações-do-curso",
+    "href": "sobre.html#informações-do-curso",
+    "title": "Sobre Nós",
+    "section": "Informações do Curso",
+    "text": "Informações do Curso\nEste portfólio foi criado como parte do curso Projeto Big Data para Finanças na [Nome da Sua Faculdade].\nProfessor: [Nome do Professor]\nPeríodo: [Semestre/Ano]"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Portfólio do Nosso Grupo",
+    "section": "",
+    "text": "Somos um grupo de estudantes da [Nome da Sua Faculdade] trabalhando juntos em vários projetos de ciência de dados e big data. Este portfólio apresenta nosso trabalho colaborativo e nossas conquistas."
+  },
+  {
+    "objectID": "index.html#bem-vindo-ao-nosso-portfólio-de-ciência-de-dados",
+    "href": "index.html#bem-vindo-ao-nosso-portfólio-de-ciência-de-dados",
+    "title": "Portfólio do Nosso Grupo",
+    "section": "",
+    "text": "Somos um grupo de estudantes da [Nome da Sua Faculdade] trabalhando juntos em vários projetos de ciência de dados e big data. Este portfólio apresenta nosso trabalho colaborativo e nossas conquistas."
+  },
+  {
+    "objectID": "index.html#projeto-em-destaque",
+    "href": "index.html#projeto-em-destaque",
+    "title": "Portfólio do Nosso Grupo",
+    "section": "Projeto em Destaque",
+    "text": "Projeto em Destaque\n\n\n\nImagem do Projeto\n\n\n\nAnálise de Dados Financeiros\nNosso projeto principal envolve a análise de dados do mercado financeiro para identificar padrões e fazer previsões. Implementamos vários algoritmos de machine learning e técnicas de visualização.\nVer Detalhes do Projeto →"
+  },
+  {
+    "objectID": "index.html#membros-do-grupo",
+    "href": "index.html#membros-do-grupo",
+    "title": "Portfólio do Nosso Grupo",
+    "section": "Membros do Grupo",
+    "text": "Membros do Grupo\n\nNome do Membro - Função/Especialidade\nNome do Membro - Função/Especialidade\nNome do Membro - Função/Especialidade\nNome do Membro - Função/Especialidade"
+  },
+  {
+    "objectID": "index.html#tecnologias-que-utilizamos",
+    "href": "index.html#tecnologias-que-utilizamos",
+    "title": "Portfólio do Nosso Grupo",
+    "section": "Tecnologias que Utilizamos",
+    "text": "Tecnologias que Utilizamos\n\nR/Python para Análise de Dados\nQuarto para Documentação\nGitHub para Colaboração\nBibliotecas de Machine Learning\nIntegração com APIs Financeiras"
+  },
+  {
+    "objectID": "projetos.html",
+    "href": "projetos.html",
+    "title": "Nossos Projetos",
+    "section": "",
+    "text": "Projeto de Finanças\n\n\n\n\nEste projeto se concentra na análise de grandes conjuntos de dados financeiros para extrair insights e padrões significativos. Implementamos vários algoritmos de machine learning para prever movimentos do mercado e identificar oportunidades de investimento.\n\n\n\n\nAnálise de Séries Temporais\nProcessamento de Linguagem Natural para Análise de Sentimento de Notícias\nMachine Learning para Previsão\nVisualizações Interativas\n\n\n\n\n\nDescobrimos correlação entre o sentimento nas redes sociais e os movimentos do mercado\nCriamos um modelo preditivo com 78% de precisão para mudanças de preço de curto prazo\nDesenvolvemos um painel interativo para análise de mercado em tempo real\n\nVer no GitHub →"
+  },
+  {
+    "objectID": "projetos.html#projeto-big-data-para-finanças",
+    "href": "projetos.html#projeto-big-data-para-finanças",
+    "title": "Nossos Projetos",
+    "section": "",
+    "text": "Projeto de Finanças\n\n\n\n\nEste projeto se concentra na análise de grandes conjuntos de dados financeiros para extrair insights e padrões significativos. Implementamos vários algoritmos de machine learning para prever movimentos do mercado e identificar oportunidades de investimento.\n\n\n\n\nAnálise de Séries Temporais\nProcessamento de Linguagem Natural para Análise de Sentimento de Notícias\nMachine Learning para Previsão\nVisualizações Interativas\n\n\n\n\n\nDescobrimos correlação entre o sentimento nas redes sociais e os movimentos do mercado\nCriamos um modelo preditivo com 78% de precisão para mudanças de preço de curto prazo\nDesenvolvemos um painel interativo para análise de mercado em tempo real\n\nVer no GitHub →"
+  },
+  {
+    "objectID": "projetos.html#outros-projetos",
+    "href": "projetos.html#outros-projetos",
+    "title": "Nossos Projetos",
+    "section": "Outros Projetos",
+    "text": "Outros Projetos\n\nDesafio de Visualização de Dados\nUm projeto de visualização que transforma dados financeiros complexos em gráficos intuitivos e interativos para melhor tomada de decisões.\n\n\nSimulação de Negociação Algorítmica\nDesenvolvemos um ambiente de negociação simulado para testar várias estratégias algorítmicas contra dados históricos do mercado.\n\n\nFerramenta de Avaliação de Risco Financeiro\nCriamos uma ferramenta que avalia carteiras de investimento e fornece avaliações de risco com base na volatilidade do mercado e nas correlações de ativos."
+  }
+]

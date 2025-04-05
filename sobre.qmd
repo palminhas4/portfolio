@@ -1,0 +1,59 @@
+---
+title: "Sobre Nós"
+---
+
+:::{.content-block}
+## Nossa Equipe
+
+Somos um grupo de estudantes apaixonados da [Nome da Sua Faculdade] com experiências diversas em ciência da computação, estatística, finanças e ciência de dados. Nossos esforços colaborativos se concentram na resolução de problemas do mundo real usando abordagens orientadas por dados.
+
+![Foto da Equipe](/api/placeholder/600/300)
+:::
+
+:::{.content-block}
+## Membros da Equipe
+
+### Nome do Membro
+**Função:** Analista de Dados
+**Habilidades:** R, Python, Análise Estatística
+**Contato:** email@exemplo.com
+
+### Nome do Membro
+**Função:** Engenheiro de ML
+**Habilidades:** TensorFlow, PyTorch, Deep Learning
+**Contato:** email@exemplo.com
+
+### Nome do Membro
+**Função:** Analista Financeiro
+**Habilidades:** Modelagem Financeira, Análise de Mercado
+**Contato:** email@exemplo.com
+
+### Nome do Membro
+**Função:** Especialista em Visualização
+**Habilidades:** D3.js, Tableau, Narrativa de Dados
+**Contato:** email@exemplo.com
+:::
+
+:::{.content-block}
+## Nossa Abordagem
+
+Acreditamos na aprendizagem colaborativa e na aplicação prática de técnicas de ciência de dados. Nossos projetos combinam conhecimento acadêmico com aplicações do mundo real, particularmente no setor financeiro.
+
+Nosso fluxo de trabalho geralmente inclui:
+
+1. Definição do problema e pesquisa
+2. Coleta e pré-processamento de dados
+3. Análise exploratória de dados
+4. Desenvolvimento e teste de modelos
+5. Visualização e comunicação de resultados
+6. Melhoria contínua e iteração
+:::
+
+:::{.content-block}
+## Informações do Curso
+
+Este portfólio foi criado como parte do curso **Projeto Big Data para Finanças** na [Nome da Sua Faculdade].
+
+**Professor:** [Nome do Professor]  
+**Período:** [Semestre/Ano]
+:::
