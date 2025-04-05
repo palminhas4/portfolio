@@ -1,0 +1,40 @@
+---
+title: "Portfólio - CLAPS"
+---
+
+::: content-block
+## Bem-vindo ao Nosso Portfólio
+
+Somos um grupo de estudantes do curso de Ciência de Dados da FAE Business School, trabalhando juntos em vários projetos de ciência de dados e big data. Este portfólio apresenta nosso trabalho colaborativo e nossas conquistas.
+:::
+
+::: content-block
+## Projeto em Destaque
+
+![](images/grupo ia.png){fig-align="center" width="626"}
+
+### Big Data for Finance Project
+
+Nosso projeto principal envolve a análise de dados do mercado financeiro para identificar padrões e fazer previsões. Implementamos vários algoritmos de machine learning e técnicas de visualização.
+
+[Ver Detalhes do Projeto →](projetos.qmd)
+:::
+
+::: content-block
+## Membros do Grupo
+
+-   **Gabriel Prado** - *Engenheiro de Vendas/Gestão de Projetos*
+-   **José Marcos** - *Analista de Risco/Programação*
+-   **Lucas Kainã** - *Analista de Negócios/Finanças Corporativas*
+-   **Arthur Liz** - *Analista Financeiro/Gestão Operacional*
+:::
+
+::: content-block
+## Tecnologias que Utilizamos
+
+-   R/Python para Análise de Dados
+-   Quarto para Documentação
+-   GitHub para Colaboração
+-   Bibliotecas de Machine Learning
+-   Integração com APIs Financeiras
+:::

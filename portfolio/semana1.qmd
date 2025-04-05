@@ -1,7 +1,7 @@
 ---
 title: "Análise de Carteira de Investimentos"
 author: "Equipe de Análise"
-date: "2025-03-07"
+date: "2025-04-04"
 format: 
   html:
     code-fold: true
