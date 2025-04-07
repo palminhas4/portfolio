@@ -3,7 +3,7 @@ project:
   output-dir: "."
 
 website:
-  title: "Portfólio do Grupo"
+  title: "CLAPS"
   navbar:
     background: "white"
     search: true
@@ -16,7 +16,7 @@ website:
         text: Sobre Nós
     right:
       - icon: github
-        href: https://github.com/SEU-USUARIO/portfolio
+        href: https://github.com/palminhas4/portfolio
 
 format:
   html:

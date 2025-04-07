@@ -27,8 +27,8 @@ Este projeto se concentra na análise de grandes conjuntos de dados financeiros 
 ### Evolução Semana a Semana
 
 -   [Montando a carteira de investimentos do grupo (07/03)](semana1.qmd)
--   [Geração de dados sintéticos x datasets de séries de preços conhecidos](semana2.qmd)
--   Desenvolvemos um painel interativo para análise de mercado em tempo real
+-   [Geração de dados sintéticos x datasets de séries de preços conhecidos (14/03)](semana2.qmd)
+-   [Feature Engineering em Séries de Ações de Tecnologia (21/03)](semana3.qmd)
 :::
 
 ::: content-block

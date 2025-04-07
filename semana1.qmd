@@ -1,6 +1,6 @@
 ---
-title: "Análise de Carteira de Investimentos"
-author: "Equipe de Análise"
+title: "Semana 1: Análise de Carteira de Investimentos"
+author: "CLAPS"
 date: "2025-03-07"
 format: 
   html:

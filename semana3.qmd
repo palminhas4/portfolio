@@ -1,0 +1,676 @@
+---
+title: "Semana 3: Feature Engineering em Séries de Ações de Tecnologia"
+author: "CLAPS"
+date: "2025-03-21"
+format:
+  html:
+    code-fold: show
+    toc: true
+    toc-depth: 3
+    fig-width: 8
+    fig-height: 6
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE, 
+  echo = TRUE
+)
+```
+
+## 📌 Introdução: Feature Engineering em Séries Financeiras de Tech Stocks
+
+Este documento demonstra o processo de Feature Engineering aplicado a dados de séries temporais financeiras de grandes empresas de tecnologia, focando em:
+
+- Download de dados de ações via Yahoo Finance
+- Cálculo de log-retornos e análise de distribuições
+- Modelagem da volatilidade com abordagem tradicional (janela móvel)
+- Modelagem GARCH(1,1) para estimar variância condicional
+- Visualização e comparação dos resultados
+
+## Carregando as bibliotecas necessárias
+
+```{r}
+library(ggplot2)
+library(quantmod)    # Para baixar os dados
+library(tidyverse)   # Para manipulação de dados
+library(timetk)      # Para visualização de séries temporais
+library(lubridate)   # Para manipulação de datas
+library(zoo)         # Para funções rollapply
+library(rugarch)     # Para estimação de modelos GARCH
+library(patchwork)   # Para compor múltiplos gráficos
+library(DT)          # Para exibir tabelas interativas
+library(moments)     # Para calcular momentos estatísticos
+```
+
+## Baixando dados financeiros
+
+Vamos baixar dados de ações das principais empresas de tecnologia para os últimos 5 anos.
+
+```{r}
+# Definir os tickers das empresas de tecnologia
+tickers <- c("NVDA", "AAPL", "TSLA", "META", "AMZN", "MSFT")
+
+# Definir período: últimos 5 anos
+start_date <- Sys.Date() - years(5)
+end_date   <- Sys.Date()
+
+# Baixar os dados do Yahoo Finance
+getSymbols(tickers, src = "yahoo", from = start_date, to = end_date)
+
+# Selecionar o fechamento ajustado (Adj.Close) e juntar em um único data frame
+price_list <- lapply(tickers, function(sym) Ad(get(sym)))
+tech_prices <- do.call(merge, price_list)
+colnames(tech_prices) <- tickers
+tech_prices <- na.omit(tech_prices)
+tech_prices <- tk_tbl(tech_prices, preserve.row.names = TRUE, rename_index = "date")
+tech_prices$date <- as.Date(tech_prices$date)
+
+# Exibir as primeiras linhas do dataframe
+head(tech_prices)
+```
+
+## Visualizando os preços
+
+```{r}
+# Convertendo para formato longo para melhor visualização
+prices_long <- tech_prices %>%
+  pivot_longer(-date, names_to = "Ativo", values_to = "Preco")
+
+# Plotando os preços
+prices_long %>%
+  group_by(Ativo) %>%
+  plot_time_series(
+    .date_var = date,
+    .value = Preco,
+    .title = "Preços de Fechamento Ajustados das Ações de Tecnologia",
+    .facet_ncol = 2,
+    .interactive = FALSE
+  )
+```
+
+## Normalizando os preços (Base 100)
+
+Para melhor comparar o desempenho relativo das ações ao longo do tempo:
+
+```{r}
+# Normalizar os preços (Base 100)
+normalized_prices <- tech_prices %>%
+  mutate(across(-date, ~.x / first(.x) * 100))
+
+# Converter para formato longo
+normalized_long <- normalized_prices %>%
+  pivot_longer(-date, names_to = "Ativo", values_to = "Preco_Normalizado")
+
+# Plotar os preços normalizados
+ggplot(normalized_long, aes(x = date, y = Preco_Normalizado, color = Ativo)) +
+  geom_line() +
+  labs(
+    title = "Desempenho Relativo das Ações (Base 100)",
+    x = "Data",
+    y = "Preço Normalizado (Base 100)",
+    color = "Empresa"
+  ) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1")
+```
+
+## Calculando os Log-Retornos
+
+```{r}
+# Calculando os log-retornos
+log_returns <- tech_prices %>%
+  mutate(across(-date, ~log(.x / lag(.x)))) %>%
+  na.omit()
+
+# Convertendo para formato longo para visualização
+returns_long <- log_returns %>%
+  pivot_longer(-date, names_to = "Ativo", values_to = "Retorno")
+
+# Plotando os retornos
+returns_long %>%
+  group_by(Ativo) %>%
+  plot_time_series(
+    .date_var = date,
+    .value = Retorno,
+    .title = "Log-Retornos Diários das Ações de Tecnologia",
+    .facet_ncol = 2,
+    .interactive = FALSE,
+    .smooth = FALSE
+  )
+```
+
+## Análise das Distribuições dos Retornos
+
+```{r}
+# Plotando histogramas dos retornos
+library(timetk)  # Make sure this is loaded
+
+# Plotando histogramas dos retornos
+returns_long %>%
+  ggplot(aes(x = Retorno, fill = Ativo)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~ Ativo, ncol = 2) +
+  theme_minimal() +
+  labs(title = "Distribuição dos Log-Retornos")
+
+# Calculando estatísticas descritivas
+return_stats <- returns_long %>%
+  group_by(Ativo) %>%
+  summarize(
+    Media = mean(Retorno),
+    Mediana = median(Retorno),
+    Desvio_Padrao = sd(Retorno),
+    Assimetria = skewness(Retorno),
+    Curtose = kurtosis(Retorno),
+    Min = min(Retorno),
+    Max = max(Retorno)
+  )
+
+datatable(return_stats)
+```
+
+## Boxplot dos Retornos para Identificação de Outliers
+
+```{r}
+# Boxplot dos retornos
+ggplot(returns_long, aes(x = Ativo, y = Retorno)) +
+  geom_boxplot() +
+  labs(
+    title = "Boxplot dos Log-Retornos Diários",
+    x = "Empresa",
+    y = "Log-Retorno"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Correlação entre os Retornos das Ações
+
+```{r}
+# Calculando a matriz de correlação
+cor_matrix <- log_returns %>%
+  select(-date) %>%
+  cor()
+
+# Visualizando a matriz de correlação
+cor_df <- as.data.frame(cor_matrix)
+cor_df$Stock1 <- rownames(cor_df)
+cor_long <- cor_df %>%
+  pivot_longer(-Stock1, names_to = "Stock2", values_to = "Correlation")
+
+# Plotando o heatmap
+ggplot(cor_long, aes(x = Stock1, y = Stock2, fill = Correlation)) +
+  geom_tile() +
+  scale_fill_gradient2(
+    low = "blue", mid = "white", high = "red",
+    midpoint = 0, limits = c(-1, 1)
+  ) +
+  geom_text(aes(label = round(Correlation, 2)), color = "black", size = 3) +
+  labs(
+    title = "Matriz de Correlação dos Log-Retornos",
+    x = "", y = ""
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid = element_blank()
+  )
+```
+
+## Volatilidade com Abordagem Tradicional (Janela Móvel)
+
+```{r}
+# Definindo diferentes tamanhos de janela
+window_sizes <- c(5, 21, 63)  # 1 semana, 1 mês, 3 meses de negociação
+
+# Função para calcular volatilidade anualizada
+calculate_annualized_vol <- function(returns, window_size) {
+  # Aplicando rollapply para calcular a volatilidade na janela móvel
+  vol_rolling <- rollapply(returns, width = window_size, FUN = sd, fill = NA, align = "right")
+  # Anualizar a volatilidade (multiplicando por raiz de 252 dias de negociação por ano)
+  vol_annualized <- vol_rolling * sqrt(252)
+  return(vol_annualized)
+}
+
+# Calculando volatilidade para diferentes janelas
+vol_results <- list()
+
+for (size in window_sizes) {
+  # Aplicando a função para cada coluna de retornos
+  vol_df <- log_returns %>%
+    mutate(across(-date, ~calculate_annualized_vol(.x, size)))
+  
+  # Convertendo para formato longo
+  vol_long <- vol_df %>%
+    pivot_longer(-date, names_to = "Ativo", values_to = "Volatilidade") %>%
+    mutate(Janela = paste0(size, " dias"))
+  
+  vol_results[[as.character(size)]] <- vol_long
+}
+
+# Combinando os resultados
+vol_all <- bind_rows(vol_results)
+
+# Plotando a volatilidade anualizada para diferentes janelas
+vol_all %>%
+  filter(!is.na(Volatilidade)) %>%
+  ggplot(aes(x = date, y = Volatilidade, color = Ativo)) +
+  geom_line() +
+  facet_wrap(~ Janela, scales = "free_y") +
+  labs(
+    title = "Volatilidade Anualizada com Diferentes Janelas Móveis",
+    x = "Data",
+    y = "Volatilidade Anualizada",
+    color = "Empresa"
+  ) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1")
+```
+
+## Volatilidade com GARCH(1,1)
+
+```{r}
+# Especificação do modelo GARCH(1,1) com distribuição t-Student
+spec <- ugarchspec(
+  variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+  mean.model = list(armaOrder = c(0, 0), include.mean = TRUE),
+  distribution.model = "std"
+)
+
+# Lista dos ativos (exceto a coluna "date")
+ativos <- colnames(log_returns)[-1]
+
+# Data frame para armazenar as volatilidades GARCH
+var_condicional <- tibble(date = log_returns$date)
+
+# Data frame para os parâmetros do modelo
+params_list <- list()
+
+# Loop para estimar os modelos para cada ativo
+for (ativo in ativos) {
+  # Extrair os dados do ativo
+  data_ativo <- log_returns[[ativo]]
+  
+  # Ajustar o modelo GARCH
+  fit <- ugarchfit(spec = spec, data = data_ativo, solver = 'hybrid', silent = TRUE)
+  
+  # Extrair volatilidade condicional (variância)
+  var_cond <- sigma(fit)^2
+  var_condicional[[ativo]] <- var_cond
+  
+  # Extrair os parâmetros
+  par <- coef(fit)
+  alpha <- par["alpha1"]
+  beta  <- par["beta1"]
+  alpha_beta_sum <- alpha + beta
+  
+  interp <- ifelse(alpha_beta_sum >= 0.9,
+                   sprintf("Alta persistência (α+β = %.4f)", alpha_beta_sum),
+                   sprintf("Baixa/moderada persistência (α+β = %.4f)", alpha_beta_sum))
+  
+  params_list[[ativo]] <- tibble(
+    Ativo = ativo,
+    mu = par["mu"],
+    omega = par["omega"],
+    alpha = alpha,
+    beta = beta,
+    `alpha+beta` = alpha_beta_sum,
+    nu = par["shape"],
+    Interpretacao = interp
+  )
+}
+
+# Combinar os parâmetros em um único data frame
+garch_params <- bind_rows(params_list)
+```
+
+## Parâmetros do Modelo GARCH(1,1)
+
+```{r}
+# Exibir tabela de parâmetros
+datatable(garch_params, options = list(pageLength = 10, scrollX = TRUE))
+
+# Visualizar a persistência (alpha + beta)
+ggplot(garch_params, aes(x = Ativo, y = `alpha+beta`, fill = Ativo)) +
+  geom_bar(stat = "identity") +
+  geom_hline(yintercept = 0.9, linetype = "dashed", color = "red") +
+  labs(
+    title = "Persistência da Volatilidade (α+β)",
+    subtitle = "Valores próximos a 1 indicam alta persistência dos choques",
+    x = "Empresa",
+    y = "α+β"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_brewer(palette = "Set1")
+```
+
+## Visualizando a Variância Condicional (GARCH)
+
+```{r}
+# Converter o data frame com as variâncias condicionais para formato longo
+var_cond_long <- var_condicional %>%
+  pivot_longer(-date, names_to = "Ativo", values_to = "Variancia_Condicional")
+
+# Plotar as séries temporais de variância condicional para todos os ativos
+var_cond_long %>%
+  group_by(Ativo) %>% 
+  plot_time_series(
+    .date_var = date,
+    .value = Variancia_Condicional,
+    .title = "Variância Condicional Estimada pelo Modelo GARCH(1,1)",
+    .interactive = FALSE,
+    .facet_ncol = 2,
+    .smooth = FALSE
+  ) +
+  theme_minimal() +
+  labs(x = "Data", y = "Variância Condicional")
+```
+
+## Volatilidade Anualizada pelo GARCH
+
+```{r}
+# Calcular a volatilidade anualizada a partir da variância condicional
+volatility_garch <- var_condicional %>%
+  mutate(across(-date, ~sqrt(.x) * sqrt(252)))  # Anualização (sqrt(252) dias de negociação)
+
+# Converter para formato longo
+vol_garch_long <- volatility_garch %>%
+  pivot_longer(-date, names_to = "Ativo", values_to = "Volatilidade_Anualizada")
+
+# Plotar a volatilidade anualizada
+ggplot(vol_garch_long, aes(x = date, y = Volatilidade_Anualizada, color = Ativo)) +
+  geom_line() +
+  labs(
+    title = "Volatilidade Anualizada Estimada pelo GARCH(1,1)",
+    x = "Data",
+    y = "Volatilidade Anualizada",
+    color = "Empresa"
+  ) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1")
+```
+
+## Comparação: Retornos vs. Volatilidade GARCH
+
+Vamos escolher NVDA (NVIDIA) para demonstrar a relação entre retornos e volatilidade condicional:
+
+```{r}
+# Selecionar os dados para "NVDA"
+returns_nvda <- log_returns %>% 
+  select(date, NVDA) %>% 
+  rename(Return = NVDA)
+
+vol_nvda <- var_condicional %>% 
+  select(date, NVDA) %>% 
+  rename(Garch_Vol = NVDA)
+
+# Plot de retornos
+p_returns <- returns_nvda %>%
+  plot_time_series(
+    date, Return, 
+    .title = "Retornos Diários - NVDA", 
+    .interactive = FALSE, 
+    .smooth = FALSE
+  ) +
+  theme_minimal()
+
+# Plot de volatilidade GARCH
+p_vol <- vol_nvda %>%
+  plot_time_series(
+    date, Garch_Vol, 
+    .title = "Variância Condicional (GARCH) - NVDA", 
+    .interactive = FALSE, 
+    .smooth = FALSE
+  ) +
+  theme_minimal()
+
+# Combinar os dois gráficos verticalmente
+p_returns / p_vol
+```
+
+## Comparação entre Abordagens de Volatilidade
+
+Vamos comparar a volatilidade tradicional (janela móvel) com a volatilidade GARCH para NVDA:
+
+```{r}
+# Selecionar janela móvel de 21 dias para comparação
+vol_rolling_21 <- log_returns %>%
+  mutate(across(-date, ~calculate_annualized_vol(.x, 21)))
+
+# Selecionar os dados para "NVDA"
+vol_rolling_nvda <- vol_rolling_21 %>% 
+  select(date, NVDA) %>% 
+  rename(Rolling_Vol = NVDA) %>%
+  na.omit()
+
+vol_garch_nvda <- volatility_garch %>%
+  select(date, NVDA) %>%
+  rename(Garch_Vol = NVDA)
+
+# Criar dataframe para comparação
+volatility_comparison <- vol_rolling_nvda %>%
+  inner_join(vol_garch_nvda, by = "date")
+
+# Convertendo a coluna Garch_Vol de xts para valores numéricos simples
+volatility_comparison <- volatility_comparison %>%
+  mutate(Garch_Vol = as.numeric(Garch_Vol))
+
+# Converter para formato longo
+volatility_comparison_long <- volatility_comparison %>%
+  pivot_longer(
+    cols = c(Rolling_Vol, Garch_Vol),
+    names_to = "Metodo",
+    values_to = "Volatilidade"
+  )
+
+# Plotar comparação
+volatility_comparison_long %>%
+  mutate(Metodo = factor(Metodo, 
+                         levels = c("Rolling_Vol", "Garch_Vol"),
+                         labels = c("Janela Móvel (21 dias)", "GARCH(1,1)"))) %>%
+  ggplot(aes(x = date, y = Volatilidade, color = Metodo)) +
+  geom_line() +
+  labs(
+    title = "Comparação entre Métodos de Volatilidade - NVDA",
+    x = "Data",
+    y = "Volatilidade Anualizada",
+    color = "Método"
+  ) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1")
+```
+
+## Value at Risk (VaR) com GARCH
+
+O Value at Risk (VaR) é uma medida estatística que estima a perda máxima esperada de um investimento em um período de tempo específico, dado um nível de confiança.
+
+```{r}
+# Calcular o VaR 1-day 95% usando a volatilidade GARCH
+alpha <- 0.05  # Nível de significância (5%)
+q_alpha <- qnorm(alpha)  # Quantil da distribuição normal padrão
+
+# Calcular o VaR para cada ativo
+var_df <- tibble(date = volatility_garch$date)
+
+for (ativo in ativos) {
+  # Obter a média dos retornos
+  mu <- mean(log_returns[[ativo]], na.rm = TRUE)
+  
+  # Obter a volatilidade diária (não anualizada)
+  vol_daily <- sqrt(var_condicional[[ativo]])
+  
+  # Calcular o VaR diário (1 dia)
+  var_daily <- mu + q_alpha * vol_daily
+  
+  # Converter para percentual
+  var_pct <- (exp(var_daily) - 1) * 100
+  
+  var_df[[ativo]] <- var_pct
+}
+
+# Converter para formato longo
+var_long <- var_df %>%
+  pivot_longer(-date, names_to = "Ativo", values_to = "VaR_95")
+
+# Plotar o VaR 95%
+var_long %>%
+  group_by(Ativo) %>%
+  plot_time_series(
+    .date_var = date,
+    .value = VaR_95,
+    .title = "Value at Risk (VaR) Diário a 95% com GARCH",
+    .facet_ncol = 2,
+    .interactive = FALSE,
+    .smooth = FALSE
+  ) +
+  labs(y = "VaR Diário (%)")
+```
+
+## Backtesting do VaR
+
+Vamos verificar quantas violações do VaR ocorreram (quando o retorno real foi pior que o VaR previsto):
+
+```{r}
+# Converter retornos para percentual
+returns_pct <- log_returns %>%
+  mutate(across(-date, ~(exp(.x) - 1) * 100))
+
+# Lista para armazenar resultados do backtesting
+backtesting_results <- list()
+
+for (ativo in ativos) {
+  # Juntar VaR e retornos reais
+  backtest_df <- tibble(
+    date = var_df$date,
+    VaR = var_df[[ativo]],
+    Return = returns_pct[[ativo]]
+  ) %>%
+    # Identificar violações (retorno < VaR)
+    mutate(Violation = ifelse(Return < VaR, TRUE, FALSE))
+  
+  # Contar violações
+  n_violations <- sum(backtest_df$Violation)
+  expected_violations <- nrow(backtest_df) * alpha
+  
+  backtesting_results[[ativo]] <- tibble(
+    Ativo = ativo,
+    Total_Dias = nrow(backtest_df),
+    Violacoes_Observadas = n_violations,
+    Violacoes_Esperadas = expected_violations,
+    Taxa_Violacao = n_violations / nrow(backtest_df) * 100,
+    Taxa_Esperada = alpha * 100
+  )
+  
+  # Plotar o backtesting para o primeiro ativo apenas
+  if (ativo == ativos[1]) {
+    p_backtest <- ggplot(backtest_df, aes(x = date)) +
+      geom_line(aes(y = Return, color = "Retorno Real")) +
+      geom_line(aes(y = VaR, color = "VaR 95%")) +
+      geom_point(
+        data = backtest_df %>% filter(Violation),
+        aes(x = date, y = Return),
+        color = "red", size = 2
+      ) +
+      labs(
+        title = paste("Backtesting do VaR 95% -", ativo),
+        x = "Data",
+        y = "Retorno (%)",
+        color = ""
+      ) +
+      theme_minimal() +
+      scale_color_manual(values = c("Retorno Real" = "black", "VaR 95%" = "blue"))
+  }
+}
+
+# Combinar resultados de backtesting
+backtest_summary <- bind_rows(backtesting_results)
+datatable(backtest_summary)
+
+# Mostrar o gráfico de backtesting para o primeiro ativo
+p_backtest
+```
+
+## Análise de Volatilidade em Diferentes Períodos de Mercado
+
+Vamos identificar períodos de alta e baixa volatilidade no mercado:
+
+```{r}
+# Calcular a volatilidade média do mercado (média entre todos os ativos)
+market_vol <- volatility_garch %>%
+  mutate(Market_Vol = rowMeans(across(-date))) %>%
+  select(date, Market_Vol)
+
+# Identificar períodos de alta volatilidade (acima do percentil 80)
+high_vol_threshold <- quantile(market_vol$Market_Vol, 0.8)
+low_vol_threshold <- quantile(market_vol$Market_Vol, 0.2)
+
+market_vol <- market_vol %>%
+  mutate(
+    Market_State = case_when(
+      Market_Vol >= high_vol_threshold ~ "Alta Volatilidade",
+      Market_Vol <= low_vol_threshold ~ "Baixa Volatilidade",
+      TRUE ~ "Volatilidade Normal"
+    )
+  )
+
+# Plotar a volatilidade do mercado e os estados
+ggplot(market_vol, aes(x = date, y = Market_Vol)) +
+  geom_line() +
+  geom_rect(
+    data = market_vol %>% filter(Market_State == "Alta Volatilidade"),
+    aes(xmin = date, xmax = lead(date), ymin = -Inf, ymax = Inf),
+    fill = "red", alpha = 0.2
+  ) +
+  geom_rect(
+    data = market_vol %>% filter(Market_State == "Baixa Volatilidade"),
+    aes(xmin = date, xmax = lead(date), ymin = -Inf, ymax = Inf),
+    fill = "green", alpha = 0.2
+  ) +
+  labs(
+    title = "Volatilidade Média do Mercado de Tech Stocks",
+    subtitle = "Períodos de alta volatilidade (vermelho) e baixa volatilidade (verde)",
+    x = "Data",
+    y = "Volatilidade Anualizada"
+  ) +
+  theme_minimal()
+```
+
+## Conclusões
+
+Nesta análise, aplicamos técnicas de feature engineering em séries temporais de ações de empresas de tecnologia:
+
+1. **Correlação entre Empresas de Tecnologia**:
+   - Observamos correlações significativas entre os retornos das ações tecnológicas, indicando movimentos comuns do setor.
+
+2. **Volatilidade Tradicional vs. GARCH**:
+   - A volatilidade calculada por janela móvel é mais simples, mas o modelo GARCH(1,1) captura melhor a dinâmica da volatilidade e o efeito clustering.
+
+3. **Persistência da Volatilidade**:
+   - Todas as ações analisadas apresentaram alta persistência (α+β > 0.9), indicando que choques têm efeitos duradouros no setor de tecnologia.
+
+4. **Value at Risk**:
+   - O backtesting do VaR mostra a eficácia do modelo GARCH em capturar o risco de cauda.
+
+5. **Períodos de Volatilidade**:
+   - Identificamos claramente períodos de alta e baixa volatilidade no mercado de ações tecnológicas.
+
+## Próximos Passos
+
+Para enriquecer a análise, poderíamos:
+
+- Implementar modelos GARCH assimétricos (EGARCH, GJR-GARCH) para capturar efeitos de alavancagem
+- Calcular métricas adicionais como Expected Shortfall
+- Analisar o comportamento da volatilidade em torno de eventos específicos (anúncios de resultados, lançamentos de produtos)
+- Incorporar análise de volume nas estimativas de volatilidade
+- Expandir para outras setores para comparação
+- Implementar modelos de correlação condicional (DCC-GARCH) para análise de portfólio
+
+## Referências
+
+- Tsay, R. S. (2010). Analysis of Financial Time Series (3rd ed.). Wiley.
+- Alexander, C. (2008). Market Risk Analysis, Volume II: Practical Financial Econometrics. Wiley.
+- Hull, J. C. (2018). Options, Futures, and Other Derivatives (10th ed.). Pearson.
+- Engle, R. F. (2002). Dynamic Conditional Correlation: A Simple Class of Multivariate GARCH Models. Journal of Business & Economic Statistics, 20(3), 339-350.

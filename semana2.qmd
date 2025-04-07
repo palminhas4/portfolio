@@ -1,6 +1,6 @@
 ---
 title: "Semana 2: Modelagem de Dados para Portfólios Financeiros"
-author: "Grupo CLAPS"
+author: "CLAPS"
 date: "2025-03-14"
 format:
   html:
