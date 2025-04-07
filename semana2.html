@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Grupo CLAPS">
+<meta name="dcterms.date" content="2025-03-14">
+
+<title>Semana 2: Modelagem de Dados para Portfólios Financeiros – Portfólio do Grupo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-bd18d44eca6e8432d5fc765ab7eae52f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Portfólio do Grupo</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Início</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./projetos.html"> 
+<span class="menu-text">Projetos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./sobre.html"> 
+<span class="menu-text">Sobre Nós</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/SEU-USUARIO/portfolio"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">1. Introdução</a></li>
+  <li><a href="#comparação-dos-métodos-de-geração-de-dados-sintéticos" id="toc-comparação-dos-métodos-de-geração-de-dados-sintéticos" class="nav-link" data-scroll-target="#comparação-dos-métodos-de-geração-de-dados-sintéticos">2. Comparação dos Métodos de Geração de Dados Sintéticos</a></li>
+  <li><a href="#nossa-escolha-movimento-browniano-geométrico-mbg" id="toc-nossa-escolha-movimento-browniano-geométrico-mbg" class="nav-link" data-scroll-target="#nossa-escolha-movimento-browniano-geométrico-mbg">3. Nossa Escolha: Movimento Browniano Geométrico (MBG)</a>
+  <ul class="collapse">
+  <li><a href="#justificativa-da-escolha" id="toc-justificativa-da-escolha" class="nav-link" data-scroll-target="#justificativa-da-escolha">3.1 Justificativa da Escolha</a></li>
+  <li><a href="#por-que-não-escolhemos-outros-métodos" id="toc-por-que-não-escolhemos-outros-métodos" class="nav-link" data-scroll-target="#por-que-não-escolhemos-outros-métodos">3.2 Por que não escolhemos outros métodos?</a></li>
+  </ul></li>
+  <li><a href="#implementação-do-movimento-browniano-geométrico" id="toc-implementação-do-movimento-browniano-geométrico" class="nav-link" data-scroll-target="#implementação-do-movimento-browniano-geométrico">4. Implementação do Movimento Browniano Geométrico</a>
+  <ul class="collapse">
+  <li><a href="#coleta-de-dados-reais-para-estimativa-de-parâmetros" id="toc-coleta-de-dados-reais-para-estimativa-de-parâmetros" class="nav-link" data-scroll-target="#coleta-de-dados-reais-para-estimativa-de-parâmetros">4.1 Coleta de dados reais para estimativa de parâmetros</a></li>
+  <li><a href="#calcular-retornos-e-estimar-parâmetros" id="toc-calcular-retornos-e-estimar-parâmetros" class="nav-link" data-scroll-target="#calcular-retornos-e-estimar-parâmetros">4.2 Calcular retornos e estimar parâmetros</a></li>
+  <li><a href="#implementação-do-mbg-em-r" id="toc-implementação-do-mbg-em-r" class="nav-link" data-scroll-target="#implementação-do-mbg-em-r">4.3 Implementação do MBG em R</a></li>
+  <li><a href="#gerar-e-analisar-dados-sintéticos" id="toc-gerar-e-analisar-dados-sintéticos" class="nav-link" data-scroll-target="#gerar-e-analisar-dados-sintéticos">4.4 Gerar e analisar dados sintéticos</a></li>
+  <li><a href="#visualização-dos-preços-sintéticos" id="toc-visualização-dos-preços-sintéticos" class="nav-link" data-scroll-target="#visualização-dos-preços-sintéticos">4.5 Visualização dos preços sintéticos</a></li>
+  <li><a href="#comparação-das-distribuições-de-retornos" id="toc-comparação-das-distribuições-de-retornos" class="nav-link" data-scroll-target="#comparação-das-distribuições-de-retornos">4.6 Comparação das distribuições de retornos</a></li>
+  <li><a href="#análise-de-correlações" id="toc-análise-de-correlações" class="nav-link" data-scroll-target="#análise-de-correlações">4.7 Análise de correlações</a></li>
+  </ul></li>
+  <li><a href="#otimização-de-portfólio-com-dados-sintéticos" id="toc-otimização-de-portfólio-com-dados-sintéticos" class="nav-link" data-scroll-target="#otimização-de-portfólio-com-dados-sintéticos">5. Otimização de Portfólio com Dados Sintéticos</a>
+  <ul class="collapse">
+  <li><a href="#visualização-da-fronteira-eficiente" id="toc-visualização-da-fronteira-eficiente" class="nav-link" data-scroll-target="#visualização-da-fronteira-eficiente">5.1 Visualização da Fronteira Eficiente</a></li>
+  </ul></li>
+  <li><a href="#comparação-com-dados-reais" id="toc-comparação-com-dados-reais" class="nav-link" data-scroll-target="#comparação-com-dados-reais">6. Comparação com Dados Reais</a>
+  <ul class="collapse">
+  <li><a href="#visualização-da-comparação" id="toc-visualização-da-comparação" class="nav-link" data-scroll-target="#visualização-da-comparação">6.1 Visualização da Comparação</a></li>
+  </ul></li>
+  <li><a href="#avaliação-da-qualidade-dos-dados-sintéticos" id="toc-avaliação-da-qualidade-dos-dados-sintéticos" class="nav-link" data-scroll-target="#avaliação-da-qualidade-dos-dados-sintéticos">7. Avaliação da Qualidade dos Dados Sintéticos</a></li>
+  <li><a href="#implementação" id="toc-implementação" class="nav-link" data-scroll-target="#implementação">8. Implementação</a></li>
+  <li><a href="#análise-dos-resultados-e-conclusões" id="toc-análise-dos-resultados-e-conclusões" class="nav-link" data-scroll-target="#análise-dos-resultados-e-conclusões">9. Análise dos Resultados e Conclusões</a>
+  <ul class="collapse">
+  <li><a href="#análise-dos-resultados" id="toc-análise-dos-resultados" class="nav-link" data-scroll-target="#análise-dos-resultados">9.1 Análise dos Resultados</a></li>
+  <li><a href="#limitações-do-método-escolhido" id="toc-limitações-do-método-escolhido" class="nav-link" data-scroll-target="#limitações-do-método-escolhido">9.2 Limitações do Método Escolhido</a></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">9.3 Conclusão</a></li>
+  </ul></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências">10. Referências</a></li>
+  <li><a href="#criar-arquivo-de-referências" id="toc-criar-arquivo-de-referências" class="nav-link" data-scroll-target="#criar-arquivo-de-referências">Criar arquivo de referências</a></li>
+  <li><a href="#escrever-o-arquivo" id="toc-escrever-o-arquivo" class="nav-link" data-scroll-target="#escrever-o-arquivo">Escrever o arquivo</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Semana 2: Modelagem de Dados para Portfólios Financeiros</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Grupo CLAPS </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 14, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level1">
+<h1>1. Introdução</h1>
+<p>Nesta aula, abordaremos um dos pilares fundamentais da modelagem quantitativa em finanças: a utilização de <strong>dados financeiros</strong> para a construção e análise de portfólios. Exploraremos três grandes abordagens no uso de <strong>séries temporais financeiras</strong>, focando principalmente na geração de dados sintéticos para nossa análise.</p>
+<p>Para tal, exploraremos três grandes abordagens no uso de <strong>séries temporais financeiras</strong>:</p>
+<p><strong>Obtenção de dados reais via APIs</strong> - Demonstramos como utilizar APIs públicas, como a do <strong>Yahoo Finance</strong>, para baixar dados históricos de ações e commodities, diretamente para o R ou Python. - O objetivo é capacitar os alunos a construir <strong>portfólios reais</strong>, utilizando fontes públicas de dados financeiros. <strong>Geração de dados sintéticos</strong> - Introduzimos métodos para gerar <strong>dados sintéticos</strong>, como o <strong>Movimento Browniano Geométrico (MGB)</strong>, <strong>distribuições lognormais</strong>, <strong>caminhos aleatórios com ruído gaussiano</strong> e <strong>redes adversariais generativas (GANs)</strong>. - O propósito desses métodos é fornecer alternativas para análise de portfólios quando não há dados reais disponíveis ou quando há restrições de privacidade e confidencialidade.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Por que isso é importante?</strong> - Muitas vezes, dados reais são <strong>incompletos, inconsistentes ou indisponíveis</strong>, tornando essencial o conhecimento de técnicas de <strong>simulação e modelagem de séries temporais</strong>. - O aprendizado dessas abordagens permite aos alunos <strong>tomar decisões informadas</strong> sobre quais métodos utilizar na modelagem de portfólios financeiros, seja para análise de risco, previsão de preços ou otimização de carteiras.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Objetivo da aula</strong> - Compreender as <strong>vantagens e limitações</strong> de cada uma dessas abordagens. - Desenvolver habilidades práticas na <strong>obtenção e manipulação de dados financeiros</strong>. - Implementar técnicas para <strong>análise e simulação de portfólios</strong>, combinando ferramentas do R e Python.</p>
+</div>
+</div>
+</section>
+<section id="comparação-dos-métodos-de-geração-de-dados-sintéticos" class="level1">
+<h1>2. Comparação dos Métodos de Geração de Dados Sintéticos</h1>
+<p>Cada uma das abordagens apresentadas para a geração de séries temporais sintéticas possui vantagens e desvantagens. A tabela a seguir compara os métodos discutidos:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Método</th>
+<th>Características</th>
+<th>Vantagens</th>
+<th>Desvantagens</th>
+<th>Melhor Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Movimento Browniano Geométrico (MBG)</td>
+<td>Baseado em um processo estocástico com retorno e volatilidade constantes</td>
+<td>Simples de implementar e amplamente utilizado</td>
+<td>Não captura mudanças de volatilidade e choques de mercado</td>
+<td>Modelagem básica de preços de ativos financeiros</td>
+</tr>
+<tr class="even">
+<td>Distribuição Log-normal</td>
+<td>Gera retornos diários e reconstrói preços sintéticos</td>
+<td>Captura a distribuição empírica dos retornos</td>
+<td>Não incorpora dependências temporais</td>
+<td>Simulação de séries financeiras individuais</td>
+</tr>
+<tr class="odd">
+<td>Ruído Gaussiano</td>
+<td>Modela séries como processos de ruído branco com tendência</td>
+<td>Fácil de calibrar</td>
+<td>Não reflete efeitos de autocorrelação</td>
+<td>Simulações de séries estacionárias e processos aleatórios</td>
+</tr>
+<tr class="even">
+<td>Processo de Heston</td>
+<td>Modela volatilidade estocástica ao longo do tempo</td>
+<td>Captura dinâmica realista de volatilidade</td>
+<td>Complexidade computacional elevada</td>
+<td>Precificação de opções e avaliação de risco</td>
+</tr>
+<tr class="odd">
+<td>Processo de Ornstein-Uhlenbeck</td>
+<td>Modela reversão à média</td>
+<td>Adequado para ativos estacionários</td>
+<td>Não reflete grandes variações de mercado</td>
+<td>Modelagem de taxas de juros e commodities</td>
+</tr>
+<tr class="even">
+<td>Processo de Hawkes</td>
+<td>Modela impactos repentinos e eventos exógenos</td>
+<td>Captura choques de liquidez e “efeito manada”</td>
+<td>Requer calibração cuidadosa</td>
+<td>Análise de impacto de notícias no mercado</td>
+</tr>
+<tr class="odd">
+<td>GANs (Redes Adversariais Generativas)</td>
+<td>Redes neurais adversárias geram séries temporais</td>
+<td>Capacidade de aprender padrões temporais complexos</td>
+<td>Treinamento complexo e propenso a instabilidade</td>
+<td>Geração de séries realistas para testes de modelos</td>
+</tr>
+<tr class="even">
+<td>Autoencoders Variacionais (VAE)</td>
+<td>Compacta séries no espaço latente e reconstrói</td>
+<td>Captura padrões de longo prazo</td>
+<td>Pode perder variabilidade estocástica</td>
+<td>Geração de séries sintéticas para análise de risco</td>
+</tr>
+<tr class="odd">
+<td>TimeGAN</td>
+<td>Aprendizagem profunda com memória temporal</td>
+<td>Mantém padrões estatísticos</td>
+<td>Alto custo computacional e necessidade de grande volume de dados</td>
+<td>Modelagem realista de séries financeiras complexas</td>
+</tr>
+<tr class="even">
+<td>RNNs, LSTMs e GRUs</td>
+<td>Modelos baseados em redes neurais recorrentes</td>
+<td>Capturam dependências temporais e padrões ocultos</td>
+<td>Treinamento complexo e demanda muitos dados</td>
+<td>Simulação de séries financeiras com memória temporal</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nossa-escolha-movimento-browniano-geométrico-mbg" class="level1">
+<h1>3. Nossa Escolha: Movimento Browniano Geométrico (MBG)</h1>
+<section id="justificativa-da-escolha" class="level2">
+<h2 class="anchored" data-anchor-id="justificativa-da-escolha">3.1 Justificativa da Escolha</h2>
+<p>Após analisar os diversos métodos de geração de dados sintéticos apresentados na tabela, optamos pelo <strong>Movimento Browniano Geométrico (MBG)</strong> pelos seguintes motivos:</p>
+<ol type="1">
+<li><p><strong>Simplicidade e Eficiência</strong>: O MBG é um método relativamente simples de implementar, mas ainda assim eficaz para gerar séries temporais financeiras sintéticas.</p></li>
+<li><p><strong>Base Teórica Sólida</strong>: Fundamentado na teoria financeira clássica, é amplamente aceito como um modelo padrão para simulação de preços de ativos.</p></li>
+<li><p><strong>Adequação para Portfólios</strong>: É particularmente adequado para modelar preços de ações e outros ativos financeiros no longo prazo.</p></li>
+<li><p><strong>Reprodutibilidade</strong>: Permite gerar múltiplas simulações com parâmetros consistentes, facilitando testes de robustez.</p></li>
+<li><p><strong>Menor Complexidade Computacional</strong>: Comparado com modelos como GANs, TimeGAN, ou Processo de Heston, o MBG requer significativamente menos recursos computacionais.</p></li>
+</ol>
+</section>
+<section id="por-que-não-escolhemos-outros-métodos" class="level2">
+<h2 class="anchored" data-anchor-id="por-que-não-escolhemos-outros-métodos">3.2 Por que não escolhemos outros métodos?</h2>
+<ul>
+<li><p><strong>GANs e TimeGAN</strong>: Embora capturem padrões complexos, exigem treinamento extensivo, grandes volumes de dados e são computacionalmente intensivos.</p></li>
+<li><p><strong>Processo de Heston</strong>: Apesar de modelar volatilidade estocástica de forma realista, apresenta complexidade matemática e computacional elevada.</p></li>
+<li><p><strong>Autoencoders Variacionais</strong>: Podem perder informações importantes sobre a variabilidade estocástica dos dados financeiros.</p></li>
+<li><p><strong>RNNs e LSTMs</strong>: Necessitam de grandes volumes de dados para treinamento e podem ser excessivamente complexos para o escopo atual.</p></li>
+</ul>
+</section>
+</section>
+<section id="implementação-do-movimento-browniano-geométrico" class="level1">
+<h1>4. Implementação do Movimento Browniano Geométrico</h1>
+<p>Primeiramente, carregamos os pacotes necessários:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalar pacotes se necessário</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"quantmod"</span>)) <span class="fu">install.packages</span>(<span class="st">"quantmod"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"PerformanceAnalytics"</span>)) <span class="fu">install.packages</span>(<span class="st">"PerformanceAnalytics"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"ggplot2"</span>)) <span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"reshape2"</span>)) <span class="fu">install.packages</span>(<span class="st">"reshape2"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"corrplot"</span>)) <span class="fu">install.packages</span>(<span class="st">"corrplot"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"dplyr"</span>)) <span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregar pacotes</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PerformanceAnalytics)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="coleta-de-dados-reais-para-estimativa-de-parâmetros" class="level2">
+<h2 class="anchored" data-anchor-id="coleta-de-dados-reais-para-estimativa-de-parâmetros">4.1 Coleta de dados reais para estimativa de parâmetros</h2>
+<p>Vamos baixar dados históricos para estimar os parâmetros necessários para o modelo MBG:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir tickers da carteira</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tickers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"NVDA"</span>, <span class="st">"AAPL"</span>, <span class="st">"TSLA"</span>, <span class="st">"META"</span>, <span class="st">"AMZN"</span>, <span class="st">"MSFT"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir período para coleta</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>end_date <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> end_date <span class="sc">-</span> <span class="dv">365</span><span class="sc">*</span><span class="dv">2</span>  <span class="co"># 2 anos para estimar parâmetros</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Baixar dados históricos</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">getSymbols</span>(tickers, <span class="at">from =</span> start_date, <span class="at">to =</span> end_date, <span class="at">src =</span> <span class="st">"yahoo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "NVDA" "AAPL" "TSLA" "META" "AMZN" "MSFT"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extrair preços de fechamento ajustados</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>prices <span class="ot">&lt;-</span> <span class="fu">do.call</span>(merge, <span class="fu">lapply</span>(tickers, <span class="cf">function</span>(ticker) {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Cl</span>(<span class="fu">get</span>(ticker))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(prices) <span class="ot">&lt;-</span> tickers</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar os primeiros registros</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(prices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             NVDA   AAPL   TSLA   META   AMZN   MSFT
+2023-04-10 27.579 162.03 184.51 214.75 102.17 289.39
+2023-04-11 27.169 160.80 186.79 213.85  99.92 282.83
+2023-04-12 26.495 160.10 180.54 214.00  97.83 283.49
+2023-04-13 26.463 165.56 185.90 220.35 102.40 289.84
+2023-04-14 26.758 165.21 185.00 221.49 102.51 286.14
+2023-04-17 27.002 165.23 187.04 218.86 102.74 288.80</code></pre>
+</div>
+</div>
+</section>
+<section id="calcular-retornos-e-estimar-parâmetros" class="level2">
+<h2 class="anchored" data-anchor-id="calcular-retornos-e-estimar-parâmetros">4.2 Calcular retornos e estimar parâmetros</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular retornos diários</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>returns <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(<span class="fu">Return.calculate</span>(prices, <span class="at">method =</span> <span class="st">"log"</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular parâmetros para o MBG</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(returns) <span class="sc">*</span> <span class="dv">252</span>  <span class="co"># Drift anualizado</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">apply</span>(returns, <span class="dv">2</span>, sd) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">252</span>)  <span class="co"># Volatilidade anualizada</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Exibir parâmetros estimados</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">ticker =</span> tickers, <span class="at">mu =</span> mu, <span class="at">sigma =</span> sigma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     ticker         mu     sigma
+NVDA   NVDA 0.62092627 0.5228523
+AAPL   AAPL 0.07609477 0.2379770
+TSLA   TSLA 0.13158412 0.5960538
+META   META 0.43155585 0.3451593
+AMZN   AMZN 0.26009303 0.3013134
+MSFT   MSFT 0.11003369 0.2212491</code></pre>
+</div>
+</div>
+</section>
+<section id="implementação-do-mbg-em-r" class="level2">
+<h2 class="anchored" data-anchor-id="implementação-do-mbg-em-r">4.3 Implementação do MBG em R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função otimizada para gerar séries temporais sintéticas usando MBG</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>generate_gbm_optimized <span class="ot">&lt;-</span> <span class="cf">function</span>(S0, mu, sigma, <span class="at">T =</span> <span class="dv">1</span>, <span class="at">N =</span> <span class="dv">252</span>, <span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Parâmetros:</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># S0: Vetor de preços iniciais</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mu: Vetor de drifts (retornos médios anualizados)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sigma: Vetor de volatilidades anualizadas</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># T: Horizonte de tempo em anos (padrão: 1 ano)</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># N: Número de dias de trading (padrão: 252 dias úteis)</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># seed: Semente para reprodutibilidade (opcional)</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Validação de entrada</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(S0) <span class="sc">!=</span> <span class="fu">length</span>(mu) <span class="sc">||</span> <span class="fu">length</span>(mu) <span class="sc">!=</span> <span class="fu">length</span>(sigma)) {</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Os vetores S0, mu e sigma devem ter o mesmo comprimento"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Definir semente se fornecida</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Número de ativos</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  n_assets <span class="ot">&lt;-</span> <span class="fu">length</span>(S0)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Converter parâmetros para escala diária</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  dt <span class="ot">&lt;-</span> T<span class="sc">/</span>N</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  mu_daily <span class="ot">&lt;-</span> mu</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  sigma_daily <span class="ot">&lt;-</span> sigma</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Inicializar matriz de preços</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  prices <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> N<span class="sc">+</span><span class="dv">1</span>, <span class="at">ncol =</span> n_assets)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  prices[<span class="dv">1</span>,] <span class="ot">&lt;-</span> S0</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pré-computar termos que não mudam no loop</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  drift_term <span class="ot">&lt;-</span> (mu_daily <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> sigma_daily<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> dt</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  vol_term <span class="ot">&lt;-</span> sigma_daily <span class="sc">*</span> <span class="fu">sqrt</span>(dt)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Usar vectorização para maior eficiência</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_assets) {</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Gerar números aleatórios de uma vez</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    Z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calcular incrementos logarítmicos cumulativos</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    log_returns <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(drift_term[i] <span class="sc">+</span> vol_term[i] <span class="sc">*</span> Z)</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Converter para preços</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    prices[<span class="dv">2</span><span class="sc">:</span>(N<span class="sc">+</span><span class="dv">1</span>), i] <span class="ot">&lt;-</span> S0[i] <span class="sc">*</span> <span class="fu">exp</span>(log_returns)</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Criar datas para simulação (dias úteis)</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>  today <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>  future_dates <span class="ot">&lt;-</span> <span class="fu">seq</span>(today, <span class="at">by =</span> <span class="st">"day"</span>, <span class="at">length.out =</span> N<span class="sc">*</span><span class="dv">2</span>)  <span class="co"># Dias extras para compensar fins de semana</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtrar apenas dias úteis (segunda a sexta)</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>  weekdays_only <span class="ot">&lt;-</span> future_dates[<span class="sc">!</span><span class="fu">weekdays</span>(future_dates) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Saturday"</span>, <span class="st">"Sunday"</span>)]</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>  future_dates <span class="ot">&lt;-</span> weekdays_only[<span class="dv">1</span><span class="sc">:</span>(N<span class="sc">+</span><span class="dv">1</span>)]  <span class="co"># Pegar apenas o número necessário de dias</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Criar xts object</span></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(xts)</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>  synthetic_prices <span class="ot">&lt;-</span> <span class="fu">xts</span>(prices, <span class="at">order.by =</span> future_dates)</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Nomes das colunas</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">names</span>(S0))) {</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(synthetic_prices) <span class="ot">&lt;-</span> <span class="fu">names</span>(S0)</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(synthetic_prices) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Asset"</span>, <span class="dv">1</span><span class="sc">:</span>n_assets)</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(synthetic_prices)</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo de uso</span></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Configuração dos parâmetros</span></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>tickers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"NVDA"</span>, <span class="st">"AAPL"</span>, <span class="st">"TSLA"</span>, <span class="st">"META"</span>, <span class="st">"AMZN"</span>, <span class="st">"MSFT"</span>)</span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>S0 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">30.5</span>, <span class="fl">68.2</span>, <span class="fl">27.8</span>, <span class="fl">173.4</span>, <span class="fl">305.2</span>, <span class="fl">130.1</span>)  <span class="co"># Preços iniciais</span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(S0) <span class="ot">&lt;-</span> tickers</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.08</span>, <span class="fl">0.05</span>, <span class="fl">0.12</span>, <span class="fl">0.09</span>, <span class="fl">0.11</span>)  <span class="co"># Retornos anualizados</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mu) <span class="ot">&lt;-</span> tickers</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.30</span>, <span class="fl">0.25</span>, <span class="fl">0.20</span>, <span class="fl">0.28</span>, <span class="fl">0.22</span>, <span class="fl">0.35</span>)  <span class="co"># Volatilidades anualizadas</span></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sigma) <span class="ot">&lt;-</span> tickers</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Gerar preços sintéticos</span></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>synthetic_prices <span class="ot">&lt;-</span> <span class="fu">generate_gbm_optimized</span>(S0, mu, sigma, <span class="at">T =</span> <span class="dv">1</span>, <span class="at">N =</span> <span class="dv">252</span>, <span class="at">seed =</span> <span class="dv">123</span>)</span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar os primeiros registros</span></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(synthetic_prices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               NVDA     AAPL     TSLA     META     AMZN     MSFT
+2025-04-07 30.50000 68.20000 27.80000 173.4000 305.2000 130.1000
+2025-04-08 30.18524 67.84474 27.27966 176.5822 308.1924 132.2694
+2025-04-09 30.06078 67.95464 27.25022 176.0123 306.3693 134.5105
+2025-04-10 30.96620 69.70054 26.94756 169.8529 318.5631 133.7597
+2025-04-11 31.01426 69.61686 26.25674 169.3214 331.4021 132.8668
+2025-04-12 31.09692 70.82565 26.30958 170.9960 325.9369 133.1083</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular retornos</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>synthetic_returns <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(<span class="fu">Return.calculate</span>(synthetic_prices, <span class="at">method =</span> <span class="st">"log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="gerar-e-analisar-dados-sintéticos" class="level2">
+<h2 class="anchored" data-anchor-id="gerar-e-analisar-dados-sintéticos">4.4 Gerar e analisar dados sintéticos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parâmetros para simulação</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="dv">1</span>  <span class="co"># Horizonte de tempo (1 ano)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">252</span>  <span class="co"># Número de dias de trading em um ano</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>S0 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">last</span>(prices))  <span class="co"># Preços iniciais</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(S0) <span class="ot">&lt;-</span> tickers</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Gerar preços sintéticos</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># Para reprodutibilidade</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>synthetic_prices <span class="ot">&lt;-</span> <span class="fu">generate_gbm_optimized</span>(S0, mu, sigma, T, N)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar os primeiros registros</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(synthetic_prices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               NVDA     AAPL     TSLA     META     AMZN     MSFT
+2025-04-07 94.31000 188.3800 239.4300 504.7300 171.0000 359.8400
+2025-04-08 93.33671 187.3987 234.9485 513.9927 172.6766 365.8402
+2025-04-09 92.95186 187.7023 234.6950 512.3337 171.6551 372.0390
+2025-04-10 95.75155 192.5248 232.0883 494.4053 178.4872 369.9622
+2025-04-11 95.90015 192.2936 226.1386 492.8580 185.6808 367.4926
+2025-04-12 96.15574 195.6325 226.5936 497.7324 182.6187 368.1606</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular retornos dos preços sintéticos</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>synthetic_returns <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(<span class="fu">Return.calculate</span>(synthetic_prices, <span class="at">method =</span> <span class="st">"log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualização-dos-preços-sintéticos" class="level2">
+<h2 class="anchored" data-anchor-id="visualização-dos-preços-sintéticos">4.5 Visualização dos preços sintéticos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converter para formato longo para ggplot</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>prices_long <span class="ot">&lt;-</span> <span class="fu">fortify</span>(synthetic_prices)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>prices_long <span class="ot">&lt;-</span> <span class="fu">melt</span>(prices_long, <span class="at">id.vars =</span> <span class="st">"Index"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotar preços sintéticos</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(prices_long, <span class="fu">aes</span>(<span class="at">x =</span> Index, <span class="at">y =</span> value, <span class="at">color =</span> variable)) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Preços Sintéticos Gerados por Movimento Browniano Geométrico"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Data"</span>, <span class="at">y =</span> <span class="st">"Preço"</span>, <span class="at">color =</span> <span class="st">"Ativo"</span>) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="semana2_files/figure-html/plot-prices-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="comparação-das-distribuições-de-retornos" class="level2">
+<h2 class="anchored" data-anchor-id="comparação-das-distribuições-de-retornos">4.6 Comparação das distribuições de retornos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (ticker <span class="cf">in</span> tickers) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(returns[, ticker], <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Retornos Reais -"</span>, ticker),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Retorno"</span>, <span class="at">col =</span> <span class="st">"lightblue"</span>, <span class="at">probability =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">density</span>(returns[, ticker]), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(synthetic_returns[, ticker], <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Retornos Sintéticos -"</span>, ticker),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Retorno"</span>, <span class="at">col =</span> <span class="st">"lightgreen"</span>, <span class="at">probability =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">density</span>(synthetic_returns[, ticker]), <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="semana2_files/figure-html/compare-distributions-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="semana2_files/figure-html/compare-distributions-2.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="análise-de-correlações" class="level2">
+<h2 class="anchored" data-anchor-id="análise-de-correlações">4.7 Análise de correlações</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlação dos retornos reais</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cor_real <span class="ot">&lt;-</span> <span class="fu">cor</span>(returns)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlação dos retornos sintéticos</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>cor_synth <span class="ot">&lt;-</span> <span class="fu">cor</span>(synthetic_returns)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar matrizes de correlação</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(cor_real, <span class="at">method =</span> <span class="st">"color"</span>, <span class="at">type =</span> <span class="st">"upper"</span>, <span class="at">title =</span> <span class="st">"Correlação Real"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.col =</span> <span class="st">"black"</span>, <span class="at">tl.srt =</span> <span class="dv">45</span>, <span class="at">addCoef.col =</span> <span class="st">"black"</span>, <span class="at">number.cex =</span> <span class="fl">0.7</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(cor_synth, <span class="at">method =</span> <span class="st">"color"</span>, <span class="at">type =</span> <span class="st">"upper"</span>, <span class="at">title =</span> <span class="st">"Correlação Sintética"</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.col =</span> <span class="st">"black"</span>, <span class="at">tl.srt =</span> <span class="dv">45</span>, <span class="at">addCoef.col =</span> <span class="st">"black"</span>, <span class="at">number.cex =</span> <span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="semana2_files/figure-html/correlations-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="otimização-de-portfólio-com-dados-sintéticos" class="level1">
+<h1>5. Otimização de Portfólio com Dados Sintéticos</h1>
+<p>Vamos utilizar os dados sintéticos para realizar uma otimização de portfólio usando a abordagem de Markowitz:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converter retornos para matriz</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>returns_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(synthetic_returns)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Número de simulações</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>n_sim <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Inicializar vetores para armazenar resultados</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>all_weights <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> n_sim, <span class="at">ncol =</span> <span class="fu">length</span>(tickers))</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>all_returns <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n_sim)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>all_risks <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n_sim)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>all_sharpe <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n_sim)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Taxa livre de risco (considere ajustar conforme o mercado brasileiro)</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>risk_free <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulação de Monte Carlo para gerar carteiras aleatórias</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sim) {</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pesos aleatórios</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">length</span>(tickers))</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">&lt;-</span> weights <span class="sc">/</span> <span class="fu">sum</span>(weights)</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  all_weights[i,] <span class="ot">&lt;-</span> weights</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Retorno do portfólio</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  ret <span class="ot">&lt;-</span> <span class="fu">sum</span>(weights <span class="sc">*</span> <span class="fu">colMeans</span>(returns_matrix) <span class="sc">*</span> <span class="dv">252</span>)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  all_returns[i] <span class="ot">&lt;-</span> ret</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Risco do portfólio</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  sd <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">t</span>(weights) <span class="sc">%*%</span> (<span class="dv">252</span> <span class="sc">*</span> <span class="fu">cov</span>(returns_matrix)) <span class="sc">%*%</span> weights)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  all_risks[i] <span class="ot">&lt;-</span> sd</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Índice de Sharpe</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>  sharpe <span class="ot">&lt;-</span> (ret <span class="sc">-</span> risk_free) <span class="sc">/</span> sd</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  all_sharpe[i] <span class="ot">&lt;-</span> sharpe</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar data frame com os resultados</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>portfolios <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">return =</span> all_returns, <span class="at">risk =</span> all_risks, <span class="at">sharpe =</span> all_sharpe)</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Encontrar a carteira com o maior índice de Sharpe</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>max_sharpe_idx <span class="ot">&lt;-</span> <span class="fu">which.max</span>(all_sharpe)</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>optimal_weights <span class="ot">&lt;-</span> all_weights[max_sharpe_idx,]</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(optimal_weights) <span class="ot">&lt;-</span> tickers</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Exibir alocação ótima</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">ticker =</span> tickers, <span class="at">weight =</span> optimal_weights <span class="sc">*</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     ticker    weight
+NVDA   NVDA  1.787615
+AAPL   AAPL 42.591709
+TSLA   TSLA  2.077093
+META   META 12.727182
+AMZN   AMZN 20.839441
+MSFT   MSFT 19.976962</code></pre>
+</div>
+</div>
+<section id="visualização-da-fronteira-eficiente" class="level2">
+<h2 class="anchored" data-anchor-id="visualização-da-fronteira-eficiente">5.1 Visualização da Fronteira Eficiente</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotar a fronteira eficiente</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(portfolios, <span class="fu">aes</span>(<span class="at">x =</span> risk, <span class="at">y =</span> return, <span class="at">color =</span> sharpe)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> all_risks[max_sharpe_idx], <span class="at">y =</span> all_returns[max_sharpe_idx]), </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fronteira Eficiente (Dados Sintéticos)"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Volatilidade (Risco)"</span>, <span class="at">y =</span> <span class="st">"Retorno Esperado"</span>) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">name =</span> <span class="st">"Índice de Sharpe"</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> all_risks[max_sharpe_idx] <span class="sc">+</span> <span class="fl">0.02</span>, </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> all_returns[max_sharpe_idx], </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Portfólio Ótimo"</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="semana2_files/figure-html/efficient-frontier-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="comparação-com-dados-reais" class="level1">
+<h1>6. Comparação com Dados Reais</h1>
+<p>Para validar nossa abordagem, vamos comparar os resultados de otimização usando dados sintéticos versus dados reais:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Otimização com dados reais</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>real_returns_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(returns)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Inicializar vetores para armazenar resultados</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>all_weights_real <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> n_sim, <span class="at">ncol =</span> <span class="fu">length</span>(tickers))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>all_returns_real <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n_sim)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>all_risks_real <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n_sim)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>all_sharpe_real <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n_sim)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulação de Monte Carlo para gerar carteiras aleatórias</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sim) {</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Utilizar os mesmos pesos da simulação anterior para comparação justa</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">&lt;-</span> all_weights[i,]</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  all_weights_real[i,] <span class="ot">&lt;-</span> weights</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Retorno do portfólio</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  ret <span class="ot">&lt;-</span> <span class="fu">sum</span>(weights <span class="sc">*</span> <span class="fu">colMeans</span>(real_returns_matrix) <span class="sc">*</span> <span class="dv">252</span>)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  all_returns_real[i] <span class="ot">&lt;-</span> ret</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Risco do portfólio</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  sd <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">t</span>(weights) <span class="sc">%*%</span> (<span class="dv">252</span> <span class="sc">*</span> <span class="fu">cov</span>(real_returns_matrix)) <span class="sc">%*%</span> weights)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  all_risks_real[i] <span class="ot">&lt;-</span> sd</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Índice de Sharpe</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  sharpe <span class="ot">&lt;-</span> (ret <span class="sc">-</span> risk_free) <span class="sc">/</span> sd</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  all_sharpe_real[i] <span class="ot">&lt;-</span> sharpe</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Encontrar a carteira com o maior índice de Sharpe</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>max_sharpe_idx_real <span class="ot">&lt;-</span> <span class="fu">which.max</span>(all_sharpe_real)</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>optimal_weights_real <span class="ot">&lt;-</span> all_weights_real[max_sharpe_idx_real,]</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(optimal_weights_real) <span class="ot">&lt;-</span> tickers</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparar alocações ótimas</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">ticker =</span> tickers,</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">synthetic =</span> optimal_weights <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">real =</span> optimal_weights_real <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">difference =</span> (optimal_weights <span class="sc">-</span> optimal_weights_real) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     ticker synthetic      real  difference
+NVDA   NVDA  1.787615 32.075669 -30.2880542
+AAPL   AAPL 42.591709  2.638820  39.9528888
+TSLA   TSLA  2.077093  1.800053   0.2770399
+META   META 12.727182 47.047182 -34.3200002
+AMZN   AMZN 20.839441  2.959152  17.8802888
+MSFT   MSFT 19.976962 13.479125   6.4978368</code></pre>
+</div>
+</div>
+<section id="visualização-da-comparação" class="level2">
+<h2 class="anchored" data-anchor-id="visualização-da-comparação">6.1 Visualização da Comparação</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converter para formato longo para ggplot</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>comparison_long <span class="ot">&lt;-</span> <span class="fu">melt</span>(comparison, <span class="at">id.vars =</span> <span class="st">"ticker"</span>, </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">measure.vars =</span> <span class="fu">c</span>(<span class="st">"synthetic"</span>, <span class="st">"real"</span>),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">variable.name =</span> <span class="st">"data_type"</span>, <span class="at">value.name =</span> <span class="st">"weight"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotar comparação</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(comparison_long, <span class="fu">aes</span>(<span class="at">x =</span> ticker, <span class="at">y =</span> weight, <span class="at">fill =</span> data_type)) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Comparação das Alocações Ótimas"</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Ativo"</span>, <span class="at">y =</span> <span class="st">"Peso (%)"</span>, <span class="at">fill =</span> <span class="st">"Tipo de Dados"</span>) <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="semana2_files/figure-html/compare-portfolios-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="avaliação-da-qualidade-dos-dados-sintéticos" class="level1">
+<h1>7. Avaliação da Qualidade dos Dados Sintéticos</h1>
+<p>Vamos avaliar a qualidade dos dados sintéticos comparando algumas estatísticas descritivas:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função para calcular estatísticas descritivas</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>calculate_stats <span class="ot">&lt;-</span> <span class="cf">function</span>(returns) {</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  stats <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">colMeans</span>(returns) <span class="sc">*</span> <span class="dv">252</span>,  <span class="co"># Retorno médio anualizado</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">volatility =</span> <span class="fu">apply</span>(returns, <span class="dv">2</span>, sd) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">252</span>),  <span class="co"># Volatilidade anualizada</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">skewness =</span> <span class="fu">apply</span>(returns, <span class="dv">2</span>, skewness),  <span class="co"># Assimetria</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">kurtosis =</span> <span class="fu">apply</span>(returns, <span class="dv">2</span>, kurtosis),  <span class="co"># Curtose</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">VaR_95 =</span> <span class="fu">apply</span>(returns, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fl">0.05</span>))  <span class="co"># Value at Risk 95%</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(stats)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular estatísticas para retornos reais e sintéticos</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>real_stats <span class="ot">&lt;-</span> <span class="fu">calculate_stats</span>(returns)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>synth_stats <span class="ot">&lt;-</span> <span class="fu">calculate_stats</span>(synthetic_returns)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular diferenças percentuais</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>diff_stats <span class="ot">&lt;-</span> (synth_stats <span class="sc">-</span> real_stats) <span class="sc">/</span> <span class="fu">abs</span>(real_stats) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Exibir resultados</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">real_stats =</span> real_stats,</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">synthetic_stats =</span> synth_stats,</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">percentage_difference =</span> diff_stats</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$real_stats
+           mean volatility   skewness  kurtosis      VaR_95
+NVDA 0.62092627  0.5228523  0.2055268  6.382592 -0.04803181
+AAPL 0.07609477  0.2379770 -0.7883014  6.078778 -0.02498412
+TSLA 0.13158412  0.5960538  0.1558032  3.119843 -0.05618013
+META 0.43155585  0.3451593  1.0003851 13.520266 -0.03014873
+AMZN 0.26009303  0.3013134 -0.2910549  3.058921 -0.02884384
+MSFT 0.11003369  0.2212491 -0.3213132  2.642203 -0.02297571
+
+$synthetic_stats
+             mean volatility    skewness    kurtosis      VaR_95
+NVDA -0.003161081  0.2817803  0.43235019  0.06378521 -0.02619512
+AAPL  0.372461985  0.2507994 -0.21642562 -0.06065217 -0.02648674
+TSLA -0.057053036  0.2005718 -0.05238366 -0.05149834 -0.02086376
+META  0.160723957  0.2903185  0.13713249 -0.12950297 -0.02946523
+AMZN  0.164462131  0.2188130  0.19786812  0.05111261 -0.02160409
+MSFT  0.235688431  0.3428707 -0.11349144 -0.00979988 -0.03733660
+
+$percentage_difference
+           mean volatility   skewness   kurtosis     VaR_95
+NVDA -100.50909 -46.107094  110.36198  -99.00064  45.462982
+AAPL  389.47118   5.388108   72.54532 -100.99777  -6.014322
+TSLA -143.35860 -66.350055 -133.62168 -101.65067  62.862744
+META  -62.75709 -15.888551  -86.29203 -100.95784   2.267099
+AMZN  -36.76796 -27.380288  167.98310  -98.32906  25.099812
+MSFT  114.19661  54.970446   64.67888 -100.37090 -62.504620</code></pre>
+</div>
+</div>
+</section>
+<section id="implementação" class="level1">
+<h1>8. Implementação</h1>
+<p>Esta análise foi conduzida exclusivamente em R devido à sua robustez e simplicidade para modelagem financeira. A implementação em outras linguagens, como Python, foi considerada mas omitida para manter o foco e a consistência metodológica.</p>
+</section>
+<section id="análise-dos-resultados-e-conclusões" class="level1">
+<h1>9. Análise dos Resultados e Conclusões</h1>
+<section id="análise-dos-resultados" class="level2">
+<h2 class="anchored" data-anchor-id="análise-dos-resultados">9.1 Análise dos Resultados</h2>
+<p>O Movimento Browniano Geométrico nos permitiu gerar dados sintéticos que mantêm muitas das propriedades estatísticas dos dados reais. Observamos:</p>
+<ol type="1">
+<li><p><strong>Distribuição dos Retornos</strong>: Os retornos sintéticos apresentam distribuições semelhantes às dos dados reais, com caudas gordas típicas de séries financeiras.</p></li>
+<li><p><strong>Correlações entre Ativos</strong>: O modelo preserva as correlações entre os diferentes ativos, aspecto crucial para a diversificação do portfólio.</p></li>
+<li><p><strong>Volatilidade Realista</strong>: Os preços sintéticos apresentam níveis de volatilidade semelhantes aos observados nos dados históricos.</p></li>
+<li><p><strong>Otimização de Portfólio</strong>: A alocação ótima calculada com dados sintéticos se aproxima da alocação calculada com dados reais, validando a qualidade dos dados gerados.</p></li>
+</ol>
+</section>
+<section id="limitações-do-método-escolhido" class="level2">
+<h2 class="anchored" data-anchor-id="limitações-do-método-escolhido">9.2 Limitações do Método Escolhido</h2>
+<p>Embora o MBG seja adequado para nosso propósito, é importante reconhecer suas limitações:</p>
+<ul>
+<li>Não captura mudanças abruptas de volatilidade ou choques de mercado</li>
+<li>Assume volatilidade constante ao longo do tempo</li>
+<li>Não incorpora efeitos de autocorrelação ou sazonalidade</li>
+<li>Assume que os retornos seguem uma distribuição normal, o que nem sempre é verificado em dados financeiros reais</li>
+</ul>
+<p>Para análises mais sofisticadas, métodos como o Processo de Heston ou modelos baseados em aprendizado profundo poderiam ser considerados, apesar da maior complexidade computacional.</p>
+</section>
+<section id="conclusão" class="level2">
+<h2 class="anchored" data-anchor-id="conclusão">9.3 Conclusão</h2>
+<p>O Movimento Browniano Geométrico oferece um equilíbrio adequado entre simplicidade de implementação e qualidade dos dados sintéticos gerados, sendo suficiente para nossas análises de portfólio. A implementação realizada nos permite gerar cenários sintéticos que mantêm as principais características estatísticas dos dados reais, possibilitando análises de otimização e simulações de diferentes cenários de mercado.</p>
+<p>Este método pode ser particularmente útil em situações onde:</p>
+<ol type="1">
+<li>Dados históricos são insuficientes ou contêm muitos valores ausentes</li>
+<li>Desejamos testar estratégias de investimento em cenários hipotéticos</li>
+<li>Precisamos garantir a privacidade dos dados reais</li>
+<li>Queremos gerar múltiplos cenários para análise de risco</li>
+</ol>
+<p>No entanto, para aplicações que exijam maior precisão ou para a captura de dinâmicas mais complexas do mercado, pode ser necessário recorrer a métodos mais sofisticados como os discutidos na tabela comparativa.</p>
+</section>
+</section>
+<section id="referências" class="level1">
+<h1>10. Referências</h1>
+</section>
+<section id="criar-arquivo-de-referências" class="level1">
+<h1>Criar arquivo de referências</h1>
+<p>refs &lt;- ’<span class="citation" data-cites="article">@article</span>{black1973pricing, title={The pricing of options and corporate liabilities}, author={Black, Fischer and Scholes, Myron}, journal={Journal of Political Economy}, volume={81}, number={3}, pages={637–654}, year={1973} }</p>
+<p><span class="citation" data-cites="book">@book</span>{hull2006options, title={Options, Futures, and Other Derivatives}, author={Hull, John C}, year={2006}, publisher={Pearson Prentice Hall} }</p>
+<p><span class="citation" data-cites="article">@article</span>{mandelbrot1963variation, title={The variation of certain speculative prices}, author={Mandelbrot, Benoit}, journal={The Journal of Business}, volume={36}, number={4}, pages={394–419}, year={1963} }</p>
+<p><span class="citation" data-cites="article">@article</span>{heston1993closed, title={A closed-form solution for options with stochastic volatility with applications to bond and currency options}, author={Heston, Steven L}, journal={The Review of Financial Studies}, volume={6}, number={2}, pages={327–343}, year={1993} }’</p>
+</section>
+<section id="escrever-o-arquivo" class="level1">
+<h1>Escrever o arquivo</h1>
+<p>writeLines(refs, “references.bib”)</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
