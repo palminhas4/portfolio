@@ -424,12 +424,12 @@ Tip
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(prices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             NVDA   AAPL   TSLA   META   AMZN   MSFT
-2023-04-10 27.579 162.03 184.51 214.75 102.17 289.39
-2023-04-11 27.169 160.80 186.79 213.85  99.92 282.83
 2023-04-12 26.495 160.10 180.54 214.00  97.83 283.49
 2023-04-13 26.463 165.56 185.90 220.35 102.40 289.84
 2023-04-14 26.758 165.21 185.00 221.49 102.51 286.14
-2023-04-17 27.002 165.23 187.04 218.86 102.74 288.80</code></pre>
+2023-04-17 27.002 165.23 187.04 218.86 102.74 288.80
+2023-04-18 27.667 166.47 184.31 217.89 102.30 288.37
+2023-04-19 27.931 167.63 180.59 215.70 104.30 288.45</code></pre>
 </div>
 </div>
 </section>
@@ -447,12 +447,12 @@ Tip
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">ticker =</span> tickers, <span class="at">mu =</span> mu, <span class="at">sigma =</span> sigma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     ticker         mu     sigma
-NVDA   NVDA 0.62092627 0.5228523
-AAPL   AAPL 0.07609477 0.2379770
-TSLA   TSLA 0.13158412 0.5960538
-META   META 0.43155585 0.3451593
-AMZN   AMZN 0.26009303 0.3013134
-MSFT   MSFT 0.11003369 0.2212491</code></pre>
+NVDA   NVDA 0.70478803 0.5374212
+AAPL   AAPL 0.08723601 0.2637791
+TSLA   TSLA 0.16853457 0.6153999
+META   META 0.47139287 0.3616983
+AMZN   AMZN 0.31008599 0.3136379
+MSFT   MSFT 0.14915824 0.2312666</code></pre>
 </div>
 </div>
 </section>
@@ -544,12 +544,12 @@ MSFT   MSFT 0.11003369 0.2212491</code></pre>
 <span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(synthetic_prices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               NVDA     AAPL     TSLA     META     AMZN     MSFT
-2025-04-07 30.50000 68.20000 27.80000 173.4000 305.2000 130.1000
-2025-04-08 30.18524 67.84474 27.27966 176.5822 308.1924 132.2694
-2025-04-09 30.06078 67.95464 27.25022 176.0123 306.3693 134.5105
-2025-04-10 30.96620 69.70054 26.94756 169.8529 318.5631 133.7597
-2025-04-11 31.01426 69.61686 26.25674 169.3214 331.4021 132.8668
-2025-04-12 31.09692 70.82565 26.30958 170.9960 325.9369 133.1083</code></pre>
+2025-04-11 30.50000 68.20000 27.80000 173.4000 305.2000 130.1000
+2025-04-12 30.18524 67.84474 27.27966 176.5822 308.1924 132.2694
+2025-04-13 30.06078 67.95464 27.25022 176.0123 306.3693 134.5105
+2025-04-14 30.96620 69.70054 26.94756 169.8529 318.5631 133.7597
+2025-04-15 31.01426 69.61686 26.25674 169.3214 331.4021 132.8668
+2025-04-16 31.09692 70.82565 26.30958 170.9960 325.9369 133.1083</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular retornos</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>synthetic_returns <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(<span class="fu">Return.calculate</span>(synthetic_prices, <span class="at">method =</span> <span class="st">"log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -572,12 +572,12 @@ MSFT   MSFT 0.11003369 0.2212491</code></pre>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(synthetic_prices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               NVDA     AAPL     TSLA     META     AMZN     MSFT
-2025-04-07 94.31000 188.3800 239.4300 504.7300 171.0000 359.8400
-2025-04-08 93.33671 187.3987 234.9485 513.9927 172.6766 365.8402
-2025-04-09 92.95186 187.7023 234.6950 512.3337 171.6551 372.0390
-2025-04-10 95.75155 192.5248 232.0883 494.4053 178.4872 369.9622
-2025-04-11 95.90015 192.2936 226.1386 492.8580 185.6808 367.4926
-2025-04-12 96.15574 195.6325 226.5936 497.7324 182.6187 368.1606</code></pre>
+2025-04-11 107.5700 190.4200 252.4000 546.2900 181.2200 381.3500
+2025-04-12 106.4599 189.4281 247.6758 556.3153 182.9968 387.7089
+2025-04-13 106.0209 189.7349 247.4085 554.5198 181.9143 394.2782
+2025-04-14 109.2142 194.6096 244.6606 535.1151 189.1547 392.0772
+2025-04-15 109.3837 194.3760 238.3886 533.4404 196.7782 389.4601
+2025-04-16 109.6753 197.7510 238.8683 538.7162 193.5331 390.1680</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular retornos dos preços sintéticos</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>synthetic_returns <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(<span class="fu">Return.calculate</span>(synthetic_prices, <span class="at">method =</span> <span class="st">"log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -860,12 +860,12 @@ MSFT   MSFT 19.976962 13.479125   6.4978368</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>$real_stats
            mean volatility   skewness  kurtosis      VaR_95
-NVDA 0.62092627  0.5228523  0.2055268  6.382592 -0.04803181
-AAPL 0.07609477  0.2379770 -0.7883014  6.078778 -0.02498412
-TSLA 0.13158412  0.5960538  0.1558032  3.119843 -0.05618013
-META 0.43155585  0.3451593  1.0003851 13.520266 -0.03014873
-AMZN 0.26009303  0.3013134 -0.2910549  3.058921 -0.02884384
-MSFT 0.11003369  0.2212491 -0.3213132  2.642203 -0.02297571
+NVDA 0.70478803  0.5374212 0.39842928  6.630349 -0.04837402
+AAPL 0.08723601  0.2637791 0.55457184 14.099534 -0.02651898
+TSLA 0.16853457  0.6153999 0.40235481  3.928530 -0.05630172
+META 0.47139287  0.3616983 1.20938271 13.344581 -0.03176080
+AMZN 0.31008599  0.3136379 0.04129336  4.332003 -0.03037659
+MSFT 0.14915824  0.2312666 0.26064812  5.490325 -0.02339302
 
 $synthetic_stats
              mean volatility    skewness    kurtosis      VaR_95
@@ -877,13 +877,13 @@ AMZN  0.164462131  0.2188130  0.19786812  0.05111261 -0.02160409
 MSFT  0.235688431  0.3428707 -0.11349144 -0.00979988 -0.03733660
 
 $percentage_difference
-           mean volatility   skewness   kurtosis     VaR_95
-NVDA -100.50909 -46.107094  110.36198  -99.00064  45.462982
-AAPL  389.47118   5.388108   72.54532 -100.99777  -6.014322
-TSLA -143.35860 -66.350055 -133.62168 -101.65067  62.862744
-META  -62.75709 -15.888551  -86.29203 -100.95784   2.267099
-AMZN  -36.76796 -27.380288  167.98310  -98.32906  25.099812
-MSFT  114.19661  54.970446   64.67888 -100.37090 -62.504620</code></pre>
+           mean volatility    skewness   kurtosis      VaR_95
+NVDA -100.44852 -47.568079    8.513661  -99.03798  45.8487843
+AAPL  326.95900  -4.920657 -139.025714 -100.43017   0.1215634
+TSLA -133.85242 -67.407895 -113.019271 -101.31088  62.9429452
+META  -65.90446 -19.734615  -88.660952 -100.97045   7.2276808
+AMZN  -46.96241 -30.233898  379.176580  -98.82012  28.8791565
+MSFT   58.01234  48.257780 -143.542015 -100.17849 -59.6057013</code></pre>
 </div>
 </div>
 </section>
