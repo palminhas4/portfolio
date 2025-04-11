@@ -13,7 +13,7 @@ Somos um grupo de estudantes apaixonados da FAE com experiências diversas em ci
 ::: content-block
 ## Membros da Equipe
 
-![](images/gabe.jpeg){width="170"}
+[![](images/gabe.jpeg){width="170"}](https://gabriel-days.github.io/portfolio/)
 
 ### Gabriel Prado
 
@@ -72,7 +72,7 @@ Nosso fluxo de trabalho geralmente inclui:
 
 Este portfólio foi criado como parte do curso **Big Data for Finance Project** na FAE Business School. Conduzida por:
 
-![](images/profrodrigo.jpg)
+[![](images/profrodrigo.jpg)](https://profrhozon.github.io/site/)
 
 **Professor Rodrigo H. Ozon\
 **
